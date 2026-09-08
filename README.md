@@ -5,18 +5,10 @@
 
 <!-- Rayla Source Banner -->
 <div align="center">
-  <a href="https://trail-b1az3r.github.io/HyperNix-pip/docs/public/v1/" style="text-decoration: none;">
-    <div style="background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); border-radius: 12px; padding: 20px 30px; margin: 20px 0; box-shadow: 0 4px 15px rgba(102, 126, 234, 0.4); max-width: 600px; margin-left: auto; margin-right: auto; cursor: pointer; transition: transform 0.2s ease;">
-      <div style="color: white; font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;">
-        <div style="font-size: 24px; font-weight: bold; margin-bottom: 8px;">📱 Add Rayla Source</div>
-        <div style="font-size: 14px; opacity: 0.9; margin-bottom: 12px;">Click to open banner & copy source URL for AltStore & SideStore</div>
-        <div style="background: rgba(255,255,255,0.2); border-radius: 6px; padding: 10px 15px; font-family: monospace; font-size: 12px; word-break: break-all;">
-          https://trail-b1az3r.github.io/HyperNix-pip/docs/public/v1/
-        </div>
-        <div style="margin-top: 10px; font-size: 13px; opacity: 0.8;">👆 Click banner to copy source URL instantly</div>
-      </div>
-    </div>
-  </a>
+  <iframe src="https://trail-b1az3r.github.io/HyperNix-pip/docs/public/v1/index.html" 
+          style="width: 640px; height: 280px; border: none; overflow: hidden;" 
+          title="Add Rayla Source Banner">
+  </iframe>
 </div>
 <!-- End Rayla Source Banner -->
 
