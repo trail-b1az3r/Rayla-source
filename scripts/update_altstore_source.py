@@ -283,7 +283,7 @@ def update_or_add_app(source, app_config, ipa_url, version, build_number, size_b
     # Create new version entry
     new_version = {
         "version": version,
-        "versionDate": release_date,
+        "date": release_date,
         "downloadURL": ipa_url,
         "size": size_bytes,
         "localizedDescription": app_config["localizedDescription"],
@@ -319,7 +319,7 @@ def update_or_add_app(source, app_config, ipa_url, version, build_number, size_b
         
         # Update app-level metadata
         existing_app["version"] = version
-        existing_app["versionDate"] = release_date
+        existing_app["date"] = release_date
         existing_app["downloadURL"] = ipa_url
         existing_app["size"] = size_bytes
         
@@ -329,7 +329,7 @@ def update_or_add_app(source, app_config, ipa_url, version, build_number, size_b
         # Create new app entry from config template
         new_app = {k: v for k, v in app_config.items() if k not in ['ipa_source', 'workflow_id', 'artifact_pattern']}
         new_app["version"] = version
-        new_app["versionDate"] = release_date
+        new_app["date"] = release_date
         new_app["downloadURL"] = ipa_url
         new_app["size"] = size_bytes
         new_app["versions"] = [new_version]
