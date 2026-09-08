@@ -1,70 +1,49 @@
 ```
-# Dependencies
-node_modules/
-
 # Logs and temp files
 *.log
 *.tmp
+*.swp
 
 # Environment
 .env
 .env.local
-*.env.*
+.env.*
 
 # Editors
 .vscode/
 .idea/
 
-# OS generated files
-.DS_Store
-Thumbs.db
-
-# Build artifacts
+# Dependencies
+node_modules/
+.venv/
+venv/
+__pycache__/
+.mypy_cache/
+.pytest_cache/
 dist/
 build/
 target/
-*.o
-*.obj
-*.exe
-*.dll
-*.so
-*.a
-*.out
+.gradle/
 
-# Python specific
-__pycache__/
+# System files
+.DS_Store
+Thumbs.db
+
+# Compiled files
 *.pyc
-*.pyo
-*.pyd
-.Python
-*.so
-.Python
-*.egg-info/
-.eggs/
-.coverage
-htmlcov/
-.mypy_cache/
-.pytest_cache/
-.tox/
-
-# Java specific
 *.class
-*.jar
-*.war
-*.ear
-hs_err_pid*
-
-# C/C++ specific
-*.a
-*.la
-*.lo
-*.so
-*.dylib
-*.dll
-*.exe
 *.o
+*.exe
+*.dll
+*.so
+*.a
 *.obj
 *.out
+
+# Coverage
+coverage/
+htmlcov/
+.coverage
 
 # Compressed files
 *.zip
@@ -85,21 +64,4 @@ hs_err_pid*
 *.Z
 *.lz
 *.lzo
-*.tar.gz
-*.tar.bz2
-*.tar.xz
-*.tar.zst
-
-# Coverage
-coverage/
-
-# Gradle
-.gradle/
-
-# Temporary files
-*.tmp
-*.temp
-*~
-*.swp
-*.swo
 ```
