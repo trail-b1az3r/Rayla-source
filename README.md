@@ -168,7 +168,7 @@ You may choose either license. If no choice is made explicitly, option (A) appli
 ## 📚 Credits
 
 **Project Contributors & Inspirations:**
-- **HyperNix Team** — Project development and maintenance
+- **HyperNix Team** — Project development and maintenance (sadly just me and Claude Code)
 - [Riley Testut](https://github.com/RileyTestut) — Creator of [AltStore](https://altstore.io/)
 - [SideStore](https://sidestore.io/) — Alternative iOS sideloading platform
 - [mrdrvt99](https://github.com/mrdrvt99) — Developer of YouTube Plus (YouProEXTRA)
