@@ -1,0 +1,87 @@
+name: update-altstore-source
+
+# Updates the SideStore/AltStore-compatible source JSON with the latest IPA releases.
+#
+# Runs automatically once per day at 02:00 UTC, and can also be triggered
+# manually from the Actions tab (workflow_dispatch).
+#
+# The workflow:
+# 1. Fetches the latest GitHub releases containing IPA assets for each configured app
+# 2. Downloads each IPA to calculate its SHA-256 hash
+# 3. Updates the source JSON file with new version info for each app
+# 4. Commits the changes back to main if anything changed
+#
+# Supported apps:
+# - HyperLink (from trail-b1az3r/HyperNix-pip)
+# - YouTube Plus (from mrdrvt99/YouProEXTRA)
+#
+# Source format reference:
+# https://github.com/RileyTestut/AltStore/wiki/AltStore-Source-Format
+
+on:
+  schedule:
+    # Run daily at 02:00 UTC
+    - cron: '0 2 * * *'
+  workflow_dispatch:
+    inputs:
+      reason:
+        description: 'Optional note for why this run was triggered manually'
+        required: false
+        default: ''
+
+permissions:
+  contents: write
+
+concurrency:
+  group: update-altstore-source
+  cancel-in-progress: true
+
+jobs:
+  update-source:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: Setup Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+
+      - name: Update AltStore source JSON
+        env:
+          SOURCE_JSON_PATH: docs/public/v1/altstore-source.json
+          MANUAL_RUN_REASON: ${{ github.event.inputs.reason }}
+        run: python scripts/update_altstore_source.py
+
+      - name: Validate JSON syntax
+        run: |
+          python3 -c "import json; json.load(open('docs/public/v1/altstore-source.json'))" && echo "JSON is valid"
+
+      - name: Check for changes
+        id: check_changes
+        run: |
+          if git diff --quiet -- docs/public/v1/altstore-source.json; then
+            echo "changed=false" >> "$GITHUB_OUTPUT"
+            echo "No changes detected - source is already up to date"
+          else
+            echo "changed=true" >> "$GITHUB_OUTPUT"
+            echo "Changes detected in altstore-source.json"
+          fi
+
+      - name: Commit updated source
+        if: steps.check_changes.outputs.changed == 'true'
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "github-actions[bot]@users.noreply.github.com"
+          git add docs/public/v1/altstore-source.json
+          if [ "${{ github.event_name }}" = "workflow_dispatch" ]; then
+            git commit -m "chore: update IPA sources (manual)"
+          else
+            git commit -m "chore: update IPA sources (scheduled)"
+          fi
+          git push
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
