@@ -3,7 +3,7 @@
 [![Update IPA Sources](https://github.com/trail-b1az3r/HyperNix-pip/actions/workflows/update-altstore-source.yml/badge.svg)](https://github.com/trail-b1az3r/HyperNix-pip/actions/workflows/update-altstore-source.yml)
 [![License: HyperNix Dual License](https://img.shields.io/badge/License-HyperNix%20Dual-blue.svg)](LICENSE.md)
 
-Automated AltStore and SideStore source for HyperNix applications. This repository automatically updates with the latest IPA releases from configured apps.
+Automated AltStore and SideStore source for HyperNix applications (and a youtube ipa). This repository automatically updates with the latest IPA releases from configured apps.
 
 ## 📱 Available Apps
 
@@ -129,7 +129,7 @@ You may choose either license. If no choice is made explicitly, option (A) appli
 
 - This source is provided for educational and personal use only
 - All apps are sourced from their respective public GitHub repositories
-- We are not affiliated with AltStore, SideStore, or any app developers
+- I are not affiliated with AltStore, SideStore, or any app developers
 - Use at your own risk
 
 ## 🤝 Contributing
@@ -144,4 +144,4 @@ For issues or questions:
 
 ---
 
-Made with ❤️ by the HyperNix Team
+Made with ❤️ by the HyperNix Team (Rayla and claude code) 
