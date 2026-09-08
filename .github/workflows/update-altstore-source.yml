@@ -6,14 +6,16 @@ name: update-altstore-source
 # manually from the Actions tab (workflow_dispatch).
 #
 # The workflow:
-# 1. Fetches the latest GitHub releases containing IPA assets for each configured app
-# 2. Downloads each IPA to calculate its SHA-256 hash
+# 1. Fetches the latest data for each configured app:
+#    - HyperLink: Gets the most recent successful build workflow artifact from trail-b1az3r/HyperNix-pip
+#    - YouTube Plus: Fetches the latest GitHub release containing an .ipa asset from mrdrvt99/YouProEXTRA
+# 2. Downloads each IPA/artifact to calculate its SHA-256 hash (or uses GitHub's provided digest)
 # 3. Updates the source JSON file with new version info for each app
 # 4. Commits the changes back to main if anything changed
 #
 # Supported apps:
-# - HyperLink (from trail-b1az3r/HyperNix-pip)
-# - YouTube Plus (from mrdrvt99/YouProEXTRA)
+# - HyperLink (from trail-b1az3r/HyperNix-pip workflow artifacts - latest build)
+# - YouTube Plus (from mrdrvt99/YouProEXTRA releases)
 #
 # Source format reference:
 # https://github.com/RileyTestut/AltStore/wiki/AltStore-Source-Format
@@ -54,6 +56,7 @@ jobs:
         env:
           SOURCE_JSON_PATH: docs/public/v1/altstore-source.json
           MANUAL_RUN_REASON: ${{ github.event.inputs.reason }}
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         run: python scripts/update_altstore_source.py
 
       - name: Validate JSON syntax

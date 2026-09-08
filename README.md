@@ -42,21 +42,33 @@ This repository uses GitHub Actions to automatically update the AltStore/SideSto
 - **Schedule**: Runs daily at 02:00 UTC
 - **Manual Trigger**: Can be triggered manually from the Actions tab
 - **Apps Updated**:
-  - HyperLink (from `trail-b1az3r/HyperNix-pip` releases)
+  - HyperLink (from `trail-b1az3r/HyperNix-pip` workflow artifacts - latest build)
   - YouTube Plus (from `mrdrvt99/YouProEXTRA` releases)
 
 ### How It Works
 
-1. The workflow fetches the latest GitHub releases for each configured app
-2. Finds releases containing `.ipa` assets
-3. Downloads each IPA to calculate its SHA-256 checksum
-4. Updates the source JSON with:
-   - Latest version number
-   - Download URL
+1. The workflow fetches the latest data for each configured app:
+   - **HyperLink**: Gets the most recent successful build workflow run and its artifact from `trail-b1az3r/HyperNix-pip`
+   - **YouTube Plus**: Fetches the latest GitHub release containing an `.ipa` asset from `mrdrvt99/YouProEXTRA`
+2. Downloads each IPA/artifact to calculate its SHA-256 checksum (or uses GitHub's provided digest)
+3. Updates the source JSON with:
+   - Latest version number (extracted from artifact/release name)
+   - Download URL (GitHub artifact download URL or release asset URL)
    - File size
    - SHA-256 hash
-   - Release date
-5. Commits changes only if updates were detected
+   - Build timestamp/release date
+4. Commits changes only if updates were detected
+
+### HyperLink Version Source
+
+For HyperLink, the automation uses the **latest successful build workflow artifact** instead of GitHub Releases. This means:
+
+- It always points to the most recent successful CI/CD build
+- The version is extracted from the artifact name (e.g., `hypernix-dist-0.72.3.post8-166ce53`)
+- The download URL is a GitHub Actions artifact URL (requires authentication for access)
+- The SHA-256 hash is taken from GitHub's artifact digest
+
+> **Note**: Since HyperLink uses workflow artifacts, users may need to download the IPA directly from the repository's Actions tab or through other distribution channels. The artifact URLs in the source are authenticated GitHub API URLs.
 
 ### Manual Trigger
 

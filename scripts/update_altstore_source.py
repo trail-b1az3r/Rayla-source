@@ -2,12 +2,13 @@
 """
 update_altstore_source.py
 
-Fetches the latest HyperLink IPA from GitHub Releases or artifacts and updates
-the SideStore/AltStore-compatible source JSON file.
+Fetches the latest HyperLink IPA from GitHub Actions artifacts and
+YouTube Plus IPA from GitHub Releases, then updates the SideStore/AltStore-compatible source JSON file.
 
 Environment variables:
   SOURCE_JSON_PATH    Path to the source JSON file (default: docs/public/v1/altstore-source.json)
   MANUAL_RUN_REASON   Optional note when triggered via workflow_dispatch
+  GITHUB_TOKEN        GitHub token for API authentication (required for artifact access)
 """
 
 import json
@@ -19,6 +20,7 @@ from datetime import datetime, timezone
 
 SOURCE_JSON_PATH = os.environ.get("SOURCE_JSON_PATH", "docs/public/v1/altstore-source.json")
 MANUAL_RUN_REASON = os.environ.get("MANUAL_RUN_REASON", "").strip()
+GITHUB_TOKEN = os.environ.get("GITHUB_TOKEN", "")
 
 # App configurations
 APPS_CONFIG = [
@@ -33,6 +35,8 @@ APPS_CONFIG = [
         "repo_owner": "trail-b1az3r",
         "repo_name": "HyperNix-pip",
         "sourceCodeURL": "https://github.com/trail-b1az3r/HyperNix-pip",
+        "ipa_source": "artifact",  # Get IPA from workflow artifacts
+        "workflow_id": "263758454",  # build.yml workflow ID
     },
     {
         "name": "YouTube Plus",
@@ -45,6 +49,7 @@ APPS_CONFIG = [
         "repo_owner": "mrdrvt99",
         "repo_name": "YouProEXTRA",
         "sourceCodeURL": "https://github.com/mrdrvt99/YouProEXTRA",
+        "ipa_source": "release",  # Get IPA from GitHub Releases
     }
 ]
 
@@ -61,22 +66,30 @@ DEFAULT_SOURCE = {
 }
 
 
-def fetch_json(url):
+def fetch_json(url, require_auth=False):
     """Fetch JSON from a URL."""
-    req = urllib.request.Request(
-        url,
-        headers={"User-Agent": "HyperNix-AltStore-Bot/1.0"}
-    )
+    headers = {"User-Agent": "HyperNix-AltStore-Bot/1.0"}
+    
+    # Add authorization header for GitHub API requests
+    if require_auth and GITHUB_TOKEN:
+        headers["Authorization"] = f"Bearer {GITHUB_TOKEN}"
+    elif require_auth:
+        print(f"warning: GitHub API request without token may be rate limited", file=sys.stderr)
+    
+    req = urllib.request.Request(url, headers=headers)
     with urllib.request.urlopen(req, timeout=30) as resp:
         return json.loads(resp.read().decode())
 
 
-def fetch_url_content(url):
+def fetch_url_content(url, require_auth=False):
     """Fetch raw content from a URL and return it as bytes."""
-    req = urllib.request.Request(
-        url,
-        headers={"User-Agent": "HyperNix-AltStore-Bot/1.0"}
-    )
+    headers = {"User-Agent": "HyperNix-AltStore-Bot/1.0"}
+    
+    # Add authorization header for GitHub API requests
+    if require_auth and GITHUB_TOKEN:
+        headers["Authorization"] = f"Bearer {GITHUB_TOKEN}"
+    
+    req = urllib.request.Request(url, headers=headers)
     with urllib.request.urlopen(req, timeout=60) as resp:
         return resp.read()
 
@@ -106,6 +119,59 @@ def get_latest_release_with_ipa(repo_owner, repo_name):
         return None, None
     except Exception as e:
         print(f"warning: could not fetch releases for {repo_owner}/{repo_name}: {e}", file=sys.stderr)
+        return None, None
+
+
+def get_latest_artifact_ipa(repo_owner, repo_name, workflow_id):
+    """
+    Fetch the latest successful workflow run and its artifact containing the IPA.
+    For HyperLink, we look for artifacts from the build workflow.
+    Returns (run_info, artifact_info) or (None, None) if not found.
+    """
+    try:
+        # Get recent successful workflow runs
+        runs_url = f"https://api.github.com/repos/{repo_owner}/{repo_name}/actions/workflows/{workflow_id}/runs?status=success&per_page=10"
+        runs_data = fetch_json(runs_url, require_auth=True)
+        
+        runs = runs_data.get("workflow_runs", [])
+        if not runs:
+            print(f"warning: no successful runs found for workflow {workflow_id}", file=sys.stderr)
+            return None, None
+        
+        # Find the most recent run with a dist artifact
+        for run in runs:
+            run_id = run["id"]
+            created_at = run["created_at"]
+            
+            # Get artifacts for this run
+            artifacts_url = f"https://api.github.com/repos/{repo_owner}/{repo_name}/actions/runs/{run_id}/artifacts"
+            artifacts_data = fetch_json(artifacts_url, require_auth=True)
+            
+            artifacts = artifacts_data.get("artifacts", [])
+            for artifact in artifacts:
+                artifact_name = artifact.get("name", "")
+                # Look for the dist artifact (contains the wheel/sdist which is our "IPA equivalent")
+                # For HyperLink, we use the hypernix-dist-* artifact
+                if "dist" in artifact_name and "scripts" not in artifact_name:
+                    return {
+                        "id": run_id,
+                        "created_at": created_at,
+                        "head_branch": run.get("head_branch", "main"),
+                        "head_sha": run.get("head_sha", "")[:7],
+                    }, {
+                        "id": artifact["id"],
+                        "name": artifact_name,
+                        "size": artifact.get("size_in_bytes", 0),
+                        "download_url": artifact.get("archive_download_url", ""),
+                        "digest": artifact.get("digest", ""),
+                        "created_at": artifact.get("created_at", created_at),
+                    }
+        
+        print(f"warning: no suitable artifact found in recent runs", file=sys.stderr)
+        return None, None
+        
+    except Exception as e:
+        print(f"warning: could not fetch artifacts for {repo_owner}/{repo_name}: {e}", file=sys.stderr)
         return None, None
 
 
