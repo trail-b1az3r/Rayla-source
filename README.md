@@ -6,11 +6,11 @@
 ## 📱 Add Rayla Source
 
 <p align="center">
-  <iframe src="https://trail-b1az3r.github.io/HyperNix-pip/docs/public/v1/index.html" width="640" height="280" style="border: none; overflow: hidden; max-width: 100%;" title="Add Rayla Source Banner"></iframe>
+  <iframe src="https://trail-b1az3r.github.io/Rayla-source/docs/public/v1/index.html" width="640" height="280" style="border: none; overflow: hidden; max-width: 100%;" title="Add Rayla Source Banner"></iframe>
 </p>
 
 <p align="center">
-  <em>Can't see the banner? <a href="https://trail-b1az3r.github.io/HyperNix-pip/docs/public/v1/index.html" target="_blank">Click here to open it</a></em>
+  <em>Can't see the banner? <a href="https://trail-b1az3r.github.io/Rayla-source/docs/public/v1/index.html" target="_blank">Click here to open it</a></em>
 </p>
 
 Automated AltStore and SideStore source for HyperNix applications. This repository automatically updates with the latest IPA releases from configured apps.
