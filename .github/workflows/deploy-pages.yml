@@ -5,8 +5,7 @@ on:
     branches:
       - main
     paths:
-      - 'docs/public/v1/index.html'
-      - 'docs/public/v1/altstore-source.json'
+      - 'docs/public/v1/**'
   workflow_dispatch:
 
 permissions:
