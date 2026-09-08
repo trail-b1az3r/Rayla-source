@@ -3,7 +3,7 @@
 [![Update IPA Sources](https://github.com/trail-b1az3r/HyperNix-pip/actions/workflows/update-altstore-source.yml/badge.svg)](https://github.com/trail-b1az3r/HyperNix-pip/actions/workflows/update-altstore-source.yml)
 [![License: HyperNix Dual License](https://img.shields.io/badge/License-HyperNix%20Dual-blue.svg)](LICENSE.md)
 
-Automated AltStore and SideStore source for HyperNix applications (and a youtube ipa). This repository automatically updates with the latest IPA releases from configured apps.
+Automated AltStore and SideStore source for HyperNix applications. This repository automatically updates with the latest IPA releases from configured apps.
 
 ## 📱 Available Apps
 
@@ -125,23 +125,82 @@ The license offers two options:
 
 You may choose either license. If no choice is made explicitly, option (A) applies by default.
 
-## ⚠️ Disclaimer
-- YouTubeProExtra IS NOT made by me in ANY way
-- This source is provided for educational and personal use only
-- All apps are sourced from their respective public GitHub repositories
-- I am not affiliated with AltStore, SideStore, or any app developers
-- Use at your own risk
+## ⚠️ Disclaimers
+
+**Please read the following disclaimers carefully before using this source:**
+
+### General Use
+- This source is provided **as-is** for educational and personal use only
+- By using this source, you acknowledge that you do so at your own risk
+- The maintainers assume no responsibility for any damages, data loss, or legal consequences resulting from the use of this source
+
+### Legal & Compliance
+- All applications in this source are sourced from their respective public GitHub repositories
+- We are **not affiliated with** AltStore, SideStore, Apple, or any app developers listed herein
+- Use of these applications must comply with all applicable laws and regulations in your jurisdiction
+- We are not responsible for ensuring third-party apps comply with local laws or platform terms of service
+- Users are solely responsible for reviewing each app's terms of service and privacy policies
+- **YouTube Plus is NOT made by or affiliated with this project** — it is developed and maintained by [mrdrvt99](https://github.com/mrdrvt99)
+
+### Security & Integrity
+- While we implement automated checksum verification, we cannot guarantee the absolute security or integrity of downloaded files
+- Users are encouraged to independently verify app authenticity and source code
+- Always download from official sources when available and review release notes before installation
+- Be cautious of modified or altered builds not provided by official developers
+
+### iOS Device Management
+- Sideloading applications may void your iOS device warranty
+- Installation of third-party applications requires appropriate system privileges and access credentials
+- We accept no liability for any damage to your device or loss of data
+- Some functionality may be restricted or disabled on your device depending on iOS version and device settings
+
+### Content & Availability
+- App availability and functionality may change without notice
+- We do not guarantee continuous availability of sources, downloads, or related services
+- This source may be updated, modified, or discontinued at any time without prior notice
+- The information provided (version numbers, release dates, file sizes) is not guaranteed to be accurate
+
+### Third-Party Dependencies
+- This project relies on third-party services (GitHub, GitHub Actions, etc.)
+- We are not responsible for service outages, data breaches, or other issues with third-party platforms
+- The reliability of apps depends on the continued availability of their source repositories
+
+## 📚 Credits
+
+**Project Contributors & Inspirations:**
+- **HyperNix Team** — Project development and maintenance
+- [Riley Testut](https://github.com/RileyTestut) — Creator of [AltStore](https://altstore.io/)
+- [SideStore](https://sidestore.io/) — Alternative iOS sideloading platform
+- [mrdrvt99](https://github.com/mrdrvt99) — Developer of YouTube Plus (YouProEXTRA)
+- GitHub Actions — Automation and CI/CD platform
+
+**Technologies & Tools:**
+- Python — Automation scripting
+- GitHub API — Release fetching and app management
+- GitHub Actions — Continuous integration and scheduled workflows
+
+**Special Thanks:**
+- The open-source community for tools and inspiration
+- All app developers whose work is featured in this source
+- Users who contribute feedback and improvements
 
 ## 🤝 Contributing
 
 Contributions are welcome! Please feel free to submit issues or pull requests.
 
+When contributing:
+- Follow the existing code style and conventions
+- Provide clear descriptions of changes and their purpose
+- Test changes thoroughly before submitting
+- Respect the licensing terms of included projects
+
 ## 📧 Support
 
 For issues or questions:
-- Open an issue on [GitHub](https://github.com/trail-b1az3r/HyperNix-pip/issues)
-- Check existing documentation
+- Open an issue on [GitHub](https://github.com/trail-b1az3r/Rayla-source/issues)
+- Review existing documentation and closed issues for solutions
+- Include relevant error messages and system information when reporting issues
 
 ---
 
-Made with ❤️ by the HyperNix Team (Rayla and claude code) 
+Made with ❤️ by the HyperNix Team
