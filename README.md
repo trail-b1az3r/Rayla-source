@@ -6,9 +6,10 @@
 <!-- Rayla Source Banner -->
 <div align="center">
   <iframe src="https://trail-b1az3r.github.io/HyperNix-pip/docs/public/v1/index.html" 
-          style="width: 640px; height: 280px; border: none; overflow: hidden;" 
+          style="width: 640px; max-width: 100%; height: 280px; border: none; overflow: hidden;" 
           title="Add Rayla Source Banner">
   </iframe>
+  <p><small>If the banner above doesn't load, <a href="https://trail-b1az3r.github.io/HyperNix-pip/docs/public/v1/index.html" target="_blank">click here to open it</a>.</small></p>
 </div>
 <!-- End Rayla Source Banner -->
 
