@@ -3,6 +3,23 @@
 [![Update IPA Sources](https://github.com/trail-b1az3r/HyperNix-pip/actions/workflows/update-altstore-source.yml/badge.svg)](https://github.com/trail-b1az3r/HyperNix-pip/actions/workflows/update-altstore-source.yml)
 [![License: HyperNix Dual License](https://img.shields.io/badge/License-HyperNix%20Dual-blue.svg)](LICENSE.md)
 
+<!-- Rayla Source Banner -->
+<div align="center">
+  <a href="#" onclick="navigator.clipboard.writeText('https://raw.githubusercontent.com/trail-b1az3r/HyperNix-pip/main/docs/public/v1/altstore-source.json'); alert('✅ Source URL copied to clipboard! Now paste it into AltStore or SideStore.'); return false;" style="text-decoration: none;">
+    <div style="background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); border-radius: 12px; padding: 20px 30px; margin: 20px 0; box-shadow: 0 4px 15px rgba(102, 126, 234, 0.4); max-width: 600px; margin-left: auto; margin-right: auto;">
+      <div style="color: white; font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;">
+        <div style="font-size: 24px; font-weight: bold; margin-bottom: 8px;">📱 Add Rayla Source</div>
+        <div style="font-size: 14px; opacity: 0.9; margin-bottom: 12px;">Click to copy source URL for AltStore & SideStore</div>
+        <div style="background: rgba(255,255,255,0.2); border-radius: 6px; padding: 10px 15px; font-family: monospace; font-size: 12px; word-break: break-all;">
+          https://raw.githubusercontent.com/trail-b1az3r/HyperNix-pip/main/docs/public/v1/altstore-source.json
+        </div>
+        <div style="margin-top: 10px; font-size: 13px; opacity: 0.8;">✨ Click anywhere on this banner to copy</div>
+      </div>
+    </div>
+  </a>
+</div>
+<!-- End Rayla Source Banner -->
+
 Automated AltStore and SideStore source for HyperNix applications. This repository automatically updates with the latest IPA releases from configured apps.
 
 ## 📱 Available Apps
