@@ -83,13 +83,13 @@ The source JSON follows the [AltStore Source Format specification](https://githu
   "bundleIdentifier": "com.example.app",
   "developerName": "Developer",
   "version": "1.0.0",
-  "versionDate": "2024-01-01T00:00:00Z",
+  "date": "2024-01-01T00:00:00Z",
   "downloadURL": "https://...",
   "size": 12345678,
   "versions": [
     {
       "version": "1.0.0",
-      "versionDate": "2024-01-01T00:00:00Z",
+      "date": "2024-01-01T00:00:00Z",
       "downloadURL": "https://...",
       "size": 12345678,
       "sha256": "abc123...",
