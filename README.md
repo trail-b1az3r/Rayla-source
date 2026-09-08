@@ -126,10 +126,10 @@ The license offers two options:
 You may choose either license. If no choice is made explicitly, option (A) applies by default.
 
 ## ⚠️ Disclaimer
-
+- YouTubeProExtra IS NOT made by me in ANY way
 - This source is provided for educational and personal use only
 - All apps are sourced from their respective public GitHub repositories
-- I are not affiliated with AltStore, SideStore, or any app developers
+- I am not affiliated with AltStore, SideStore, or any app developers
 - Use at your own risk
 
 ## 🤝 Contributing
