@@ -36,7 +36,8 @@ APPS_CONFIG = [
         "repo_name": "HyperNix-pip",
         "sourceCodeURL": "https://github.com/trail-b1az3r/HyperNix-pip",
         "ipa_source": "artifact",  # Get IPA from workflow artifacts
-        "workflow_id": "263758454",  # build.yml workflow ID
+        "workflow_id": "340345583",  # ios.yml workflow ID
+        "artifact_pattern": "hyperlink-ipa-",  # Look for artifacts starting with this pattern
     },
     {
         "name": "YouTube Plus",
@@ -122,10 +123,10 @@ def get_latest_release_with_ipa(repo_owner, repo_name):
         return None, None
 
 
-def get_latest_artifact_ipa(repo_owner, repo_name, workflow_id):
+def get_latest_artifact_ipa(repo_owner, repo_name, workflow_id, artifact_pattern=""):
     """
     Fetch the latest successful workflow run and its artifact containing the IPA.
-    For HyperLink, we look for artifacts from the build workflow.
+    For HyperLink, we look for artifacts from the ios workflow matching the pattern.
     Returns (run_info, artifact_info) or (None, None) if not found.
     """
     try:
@@ -138,7 +139,7 @@ def get_latest_artifact_ipa(repo_owner, repo_name, workflow_id):
             print(f"warning: no successful runs found for workflow {workflow_id}", file=sys.stderr)
             return None, None
         
-        # Find the most recent run with a dist artifact
+        # Find the most recent run with a matching artifact
         for run in runs:
             run_id = run["id"]
             created_at = run["created_at"]
@@ -150,22 +151,36 @@ def get_latest_artifact_ipa(repo_owner, repo_name, workflow_id):
             artifacts = artifacts_data.get("artifacts", [])
             for artifact in artifacts:
                 artifact_name = artifact.get("name", "")
-                # Look for the dist artifact (contains the wheel/sdist which is our "IPA equivalent")
-                # For HyperLink, we use the hypernix-dist-* artifact
-                if "dist" in artifact_name and "scripts" not in artifact_name:
-                    return {
-                        "id": run_id,
-                        "created_at": created_at,
-                        "head_branch": run.get("head_branch", "main"),
-                        "head_sha": run.get("head_sha", "")[:7],
-                    }, {
-                        "id": artifact["id"],
-                        "name": artifact_name,
-                        "size": artifact.get("size_in_bytes", 0),
-                        "download_url": artifact.get("archive_download_url", ""),
-                        "digest": artifact.get("digest", ""),
-                        "created_at": artifact.get("created_at", created_at),
-                    }
+                # Skip expired artifacts
+                if artifact.get("expired", False):
+                    continue
+                
+                # If pattern specified, match against it
+                if artifact_pattern:
+                    if not artifact_name.startswith(artifact_pattern):
+                        continue
+                elif "ipa" not in artifact_name.lower():
+                    # Default: look for artifacts with 'ipa' in the name
+                    continue
+                
+                # Extract version from artifact name (e.g., hyperlink-ipa-1.0.26.9.2.1-b8)
+                version_info = extract_version_from_artifact_name(artifact_name, artifact_pattern)
+                
+                return {
+                    "id": run_id,
+                    "created_at": created_at,
+                    "head_branch": run.get("head_branch", "main"),
+                    "head_sha": run.get("head_sha", "")[:7],
+                    "version": version_info[0],
+                    "build": version_info[1],
+                }, {
+                    "id": artifact["id"],
+                    "name": artifact_name,
+                    "size": artifact.get("size_in_bytes", 0),
+                    "download_url": artifact.get("archive_download_url", ""),
+                    "digest": artifact.get("digest", ""),
+                    "created_at": artifact.get("created_at", created_at),
+                }
         
         print(f"warning: no suitable artifact found in recent runs", file=sys.stderr)
         return None, None
@@ -173,6 +188,31 @@ def get_latest_artifact_ipa(repo_owner, repo_name, workflow_id):
     except Exception as e:
         print(f"warning: could not fetch artifacts for {repo_owner}/{repo_name}: {e}", file=sys.stderr)
         return None, None
+
+
+def extract_version_from_artifact_name(artifact_name, pattern=""):
+    """
+    Extract version info from artifact name.
+    For HyperLink: hyperlink-ipa-1.0.26.9.2.1-b8 -> version=1.0.26.9.2.1, build=b8
+    """
+    # Remove the prefix pattern
+    if pattern and artifact_name.startswith(pattern):
+        artifact_name = artifact_name[len(pattern):]
+    
+    # Pattern: version-build (e.g., 1.0.26.9.2.1-b8)
+    import re
+    match = re.search(r'([0-9.]+)-b(\d+)', artifact_name)
+    if match:
+        return match.group(1), match.group(2)
+    
+    # Fallback: try to find any version-like pattern
+    match = re.search(r'([0-9]+\.[0-9.]+)', artifact_name)
+    if match:
+        build_match = re.search(r'b(\d+)', artifact_name)
+        build = build_match.group(1) if build_match else "1"
+        return match.group(1), build
+    
+    return "1.0.0", "1"
 
 
 def extract_version_from_ipa_name(ipa_name, app_name="App"):
@@ -287,14 +327,12 @@ def update_or_add_app(source, app_config, ipa_url, version, build_number, size_b
         print(f"Updated {app_config['name']} to version {version} (build {build_number})")
     else:
         # Create new app entry from config template
-        new_app = app_config.copy()
+        new_app = {k: v for k, v in app_config.items() if k not in ['ipa_source', 'workflow_id', 'artifact_pattern']}
         new_app["version"] = version
         new_app["versionDate"] = release_date
         new_app["downloadURL"] = ipa_url
         new_app["size"] = size_bytes
         new_app["versions"] = [new_version]
-        # Remove sourceCodeURL from top level as it belongs in versions
-        new_app.pop("sourceCodeURL", None)
         apps.append(new_app)
         source["apps"] = apps
         print(f"Added {app_config['name']} version {version} (build {build_number})")
@@ -315,46 +353,90 @@ def main():
         app_name = app_config["name"]
         repo_owner = app_config["repo_owner"]
         repo_name = app_config["repo_name"]
+        ipa_source = app_config.get("ipa_source", "release")
         
         print(f"\n[{app_name}] Fetching latest IPA from {repo_owner}/{repo_name}...")
         
-        release, ipa_asset = get_latest_release_with_ipa(repo_owner, repo_name)
-        
-        if not release or not ipa_asset:
-            print(f"[{app_name}] warning: Could not find any release with an IPA asset", file=sys.stderr)
-            failed_apps.append(app_name)
-            continue
-        
-        release_tag = release.get("tag_name", "unknown")
-        release_date = release.get("published_at", datetime.now(timezone.utc).isoformat())
-        ipa_name = ipa_asset.get("name", f"{app_name}.ipa")
-        ipa_url = ipa_asset.get("browser_download_url")
-        ipa_size = ipa_asset.get("size", 0)
-        
-        print(f"[{app_name}] Found IPA: {ipa_name}")
-        print(f"[{app_name}] Release: {release_tag}")
-        print(f"[{app_name}] Size: {ipa_size} bytes")
-        print(f"[{app_name}] URL: {ipa_url}")
-        
-        # Extract version from IPA name
-        version, build_number = extract_version_from_ipa_name(ipa_name, app_name)
-        print(f"[{app_name}] Parsed version: {version}, build: {build_number}")
-        
-        # Calculate SHA-256 hash by downloading the IPA
-        # Note: For large files, we might want to use the digest from GitHub API if available
-        sha256_hash = None
-        try:
-            print(f"[{app_name}] Downloading IPA to calculate SHA-256...")
-            ipa_data = fetch_url_content(ipa_url)
-            sha256_hash = calculate_sha256(ipa_data)
-            print(f"[{app_name}] SHA-256: {sha256_hash}")
-        except Exception as e:
-            print(f"[{app_name}] warning: Could not download IPA for SHA-256 calculation: {e}", file=sys.stderr)
-            # Use the digest from GitHub API if available
-            gh_digest = ipa_asset.get("digest", "")
+        # Use artifact or release based on configuration
+        if ipa_source == "artifact":
+            workflow_id = app_config.get("workflow_id", "")
+            artifact_pattern = app_config.get("artifact_pattern", "")
+            
+            if not workflow_id:
+                print(f"[{app_name}] error: workflow_id required for artifact source", file=sys.stderr)
+                failed_apps.append(app_name)
+                continue
+            
+            run_info, artifact_info = get_latest_artifact_ipa(repo_owner, repo_name, workflow_id, artifact_pattern)
+            
+            if not run_info or not artifact_info:
+                print(f"[{app_name}] warning: Could not find any artifact with IPA", file=sys.stderr)
+                failed_apps.append(app_name)
+                continue
+            
+            release_date = run_info.get("created_at", datetime.now(timezone.utc).isoformat())
+            version = run_info.get("version", "1.0.0")
+            build_number = run_info.get("build", "1")
+            ipa_name = artifact_info.get("name", f"{app_name}.ipa")
+            ipa_size = artifact_info.get("size", 0)
+            
+            # For artifacts, we need to use the archive download URL
+            # The actual IPA is inside the zip archive
+            ipa_url = artifact_info.get("download_url", "")
+            
+            print(f"[{app_name}] Found artifact: {ipa_name}")
+            print(f"[{app_name}] Run ID: {run_info['id']}")
+            print(f"[{app_name}] Version: {version}, Build: {build_number}")
+            print(f"[{app_name}] Size: {ipa_size} bytes")
+            print(f"[{app_name}] Download URL: {ipa_url}")
+            
+            # Calculate SHA-256 using the digest from GitHub API
+            sha256_hash = None
+            gh_digest = artifact_info.get("digest", "")
             if gh_digest.startswith("sha256:"):
                 sha256_hash = gh_digest.replace("sha256:", "")
-                print(f"[{app_name}] Using GitHub digest: {sha256_hash}")
+                print(f"[{app_name}] SHA-256 (from GitHub): {sha256_hash}")
+            
+            # Note: We can't directly download the IPA from artifact URL without authentication
+            # The download_url requires auth, so we rely on GitHub's digest
+        else:
+            # Use releases (original behavior)
+            release, ipa_asset = get_latest_release_with_ipa(repo_owner, repo_name)
+            
+            if not release or not ipa_asset:
+                print(f"[{app_name}] warning: Could not find any release with an IPA asset", file=sys.stderr)
+                failed_apps.append(app_name)
+                continue
+            
+            release_tag = release.get("tag_name", "unknown")
+            release_date = release.get("published_at", datetime.now(timezone.utc).isoformat())
+            ipa_name = ipa_asset.get("name", f"{app_name}.ipa")
+            ipa_url = ipa_asset.get("browser_download_url")
+            ipa_size = ipa_asset.get("size", 0)
+            
+            print(f"[{app_name}] Found IPA: {ipa_name}")
+            print(f"[{app_name}] Release: {release_tag}")
+            print(f"[{app_name}] Size: {ipa_size} bytes")
+            print(f"[{app_name}] URL: {ipa_url}")
+            
+            # Extract version from IPA name
+            version, build_number = extract_version_from_ipa_name(ipa_name, app_name)
+            print(f"[{app_name}] Parsed version: {version}, build: {build_number}")
+            
+            # Calculate SHA-256 hash by downloading the IPA
+            sha256_hash = None
+            try:
+                print(f"[{app_name}] Downloading IPA to calculate SHA-256...")
+                ipa_data = fetch_url_content(ipa_url)
+                sha256_hash = calculate_sha256(ipa_data)
+                print(f"[{app_name}] SHA-256: {sha256_hash}")
+            except Exception as e:
+                print(f"[{app_name}] warning: Could not download IPA for SHA-256 calculation: {e}", file=sys.stderr)
+                # Use the digest from GitHub API if available
+                gh_digest = ipa_asset.get("digest", "")
+                if gh_digest.startswith("sha256:"):
+                    sha256_hash = gh_digest.replace("sha256:", "")
+                    print(f"[{app_name}] Using GitHub digest: {sha256_hash}")
         
         # Load or create source JSON
         source = load_existing_source(SOURCE_JSON_PATH)
