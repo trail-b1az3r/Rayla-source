@@ -5,8 +5,7 @@
 
 ## 📱 Add Rayla Source
 
-<p align="center"> <a href="https://trail-b1az3r.github.io/Rayla-source/docs/public/v1/index.html" target="_blank" rel="noopener noreferrer"> <img src="https://trail-b1az3r.github.io/Rayla-source/docs/public/v1/banner.png" alt="Add Rayla Source Banner" style="max-width:100%;border:0;" /> </a> </p> <p align="center"><em>Can't see the banner? <a href="https://trail-b1az3r.github.io/Rayla-source/docs/public/v1/index.html" target="_blank">Click here to open it</a></em></p>
-
+<p align="center"> <a href="https://trail-b1az3r.github.io/Rayla-source/" target="_blank" rel="noopener noreferrer"> <img src="https://raw.githubusercontent.com/trail-b1az3r/Rayla-source/main/docs/public/v1/banner.svg" alt="Add Rayla Source Banner" style="max-width:100%;border:0;" /> </a> </p> <p align="center"><em>Can't see the banner? <a href="https://trail-b1az3r.github.io/Rayla-source/" target="_blank">Click here to open it</a></em></p>
 Automated AltStore and SideStore source for HyperNix applications. This repository automatically updates with the latest IPA releases from configured apps.
 
 ## 📱 Available Apps
