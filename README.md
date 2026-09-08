@@ -1,6 +1,6 @@
 # HyperNix AltStore/SideStore Source
 
-[![Update IPA Sources](https://github.com/trail-b1az3r/HyperNix-pip/actions/workflows/update-altstore-source.yml/badge.svg)](https://github.com/trail-b1az3r/HyperNix-pip/actions/workflows/update-altstore-source.yml)
+[![Update IPA Sources](https://github.com/trail-b1az3r/Rayla-source/actions/workflows/update-altstore-source.yml/badge.svg)](https://github.com/trail-b1az3r/Rayla-source/actions/workflows/update-altstore-source.yml)
 [![License: HyperNix Dual License](https://img.shields.io/badge/License-HyperNix%20Dual-blue.svg)](LICENSE.md)
 
 ## 📱 Add Rayla Source
@@ -23,7 +23,7 @@ Automated AltStore and SideStore source for HyperNix applications. This reposito
 2. Tap the **+** button in the top-left corner
 3. Enter the following URL:
    ```
-   https://raw.githubusercontent.com/trail-b1az3r/HyperNix-pip/main/docs/public/v1/altstore-source.json
+   https://raw.githubusercontent.com/trail-b1az3r/Rayla-source/main/docs/public/v1/altstore-source.json
    ```
 4. Tap **Add** to add the source
 
@@ -34,7 +34,7 @@ Automated AltStore and SideStore source for HyperNix applications. This reposito
 3. Tap **+** to add a new source
 4. Enter the following URL:
    ```
-   https://raw.githubusercontent.com/trail-b1az3r/HyperNix-pip/main/docs/public/v1/altstore-source.json
+   https://raw.githubusercontent.com/trail-b1az3r/Rayla-source/main/docs/public/v1/altstore-source.json
    ```
 5. Tap **Done** to add the source
 
