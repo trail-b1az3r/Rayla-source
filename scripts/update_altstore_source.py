@@ -26,7 +26,7 @@ GITHUB_TOKEN = os.environ.get("GITHUB_TOKEN", "")
 APPS_CONFIG = [
     {
         "name": "HyperLink",
-        "bundleIdentifier": "com.hypernix.link",
+        "bundleIdentifier": "com.hypernix.hyperlink",
         "developerName": "HyperNix Team",
         "subtitle": "Chat with local AI models on your device",
         "localizedDescription": "HyperLink is an iOS companion app that lets you chat with AI models running on your local machine. Connect over your home network or remotely via Tailscale. Send photos, upload files and code, and resolve Hugging Face GGUF links into real downloads.",
