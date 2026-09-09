@@ -42,7 +42,7 @@ Automated AltStore and SideStore source for HyperNix applications. This reposito
 
 This repository uses GitHub Actions to automatically update the AltStore/SideStore source JSON file:
 
-- **Schedule**: Runs daily at 02:00 UTC
+- **Schedule**: Runs hourly (at :17 past the hour)
 - **Manual Trigger**: Can be triggered manually from the Actions tab
 - **Apps Updated**:
   - HyperLink (from `trail-b1az3r/HyperNix-pip` releases)
