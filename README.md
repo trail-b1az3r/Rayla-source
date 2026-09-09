@@ -13,7 +13,6 @@ Automated AltStore and SideStore source for HyperNix applications. This reposito
 | App | Description | Source Repository |
 |-----|-------------|-------------------|
 | **HyperLink** | Chat with local AI models on your device | [trail-b1az3r/HyperNix-pip](https://github.com/trail-b1az3r/HyperNix-pip) |
-| **YouTube Plus** | Enhanced YouTube experience with extra features | [mrdrvt99/YouProEXTRA](https://github.com/mrdrvt99/YouProEXTRA) |
 
 ## 🔗 Installation
 
@@ -46,7 +45,6 @@ This repository uses GitHub Actions to automatically update the AltStore/SideSto
 - **Manual Trigger**: Can be triggered manually from the Actions tab
 - **Apps Updated**:
   - HyperLink (from `trail-b1az3r/HyperNix-pip` releases)
-  - YouTube Plus (from `mrdrvt99/YouProEXTRA` releases)
 
 ### How It Works
 
@@ -143,7 +141,6 @@ You may choose either license. If no choice is made explicitly, option (A) appli
 - Use of these applications must comply with all applicable laws and regulations in your jurisdiction
 - We are not responsible for ensuring third-party apps comply with local laws or platform terms of service
 - Users are solely responsible for reviewing each app's terms of service and privacy policies
-- **YouTube Plus is NOT made by or affiliated with this project** — it is developed and maintained by [mrdrvt99](https://github.com/mrdrvt99)
 
 ### Security & Integrity
 - While we implement automated checksum verification, we cannot guarantee the absolute security or integrity of downloaded files
@@ -174,7 +171,6 @@ You may choose either license. If no choice is made explicitly, option (A) appli
 - **HyperNix Team** — Project development and maintenance (sadly just me and Claude Code)
 - [Riley Testut](https://github.com/RileyTestut) — Creator of [AltStore](https://altstore.io/)
 - [SideStore](https://sidestore.io/) — Alternative iOS sideloading platform
-- [mrdrvt99](https://github.com/mrdrvt99) — Developer of YouTube Plus (YouProEXTRA)
 
 **Technologies & Tools:**
 - Python — Automation scripting

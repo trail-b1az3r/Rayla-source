@@ -2,7 +2,7 @@
   "name": "HyperNix",
   "identifier": "com.hypernix.source",
   "subtitle": "Official HyperNix app source for AltStore and SideStore",
-  "iconURL": "https://raw.githubusercontent.com/trail-b1az3r/HyperNix-pip/main/assets/logo-new/hypernix-icon.svg",
+  "iconURL": "https://raw.githubusercontent.com/trail-b1az3r/Rayla-source/main/docs/public/v1/icon.svg",
   "tintColor": "#5B5FC7",
   "apps": [
     {
@@ -32,37 +32,8 @@
           "buildVersion": "8"
         }
       ]
-    },
-    {
-      "name": "YouTube Plus",
-      "bundleIdentifier": "com.google.ios.youtube",
-      "developerName": "Google LLC (modified by zarzelworkshop)",
-      "subtitle": "Enhanced YouTube experience with extra features",
-      "localizedDescription": "YouTube Plus is a modified version of the official YouTube app with additional features including ad-blocking, background playback, Picture-in-Picture, download manager, and many more tweaks. This build includes YouPip, YTUHD, Return YouTube Dislikes, and other enhancements.",
-      "iconURL": "https://is1-ssl.mzstatic.com/image/thumb/Purple126/v6/97/45/ab/9745ab48-7f6e-cb98-d0cd-f6c9a8e7d4d5/logo_youtube_color-0-1x_U003emarketing-0-7-00-85-2.png/230x0w.webp",
-      "category": "entertainment",
-      "repo_owner": "mrdrvt99",
-      "repo_name": "YouProEXTRA",
-      "sourceCodeURL": "https://github.com/mrdrvt99/YouProEXTRA",
-      "version": "21.24.3",
-      "date": "2026-09-01T13:44:11Z",
-      "downloadURL": "https://github.com/mrdrvt99/YouProEXTRA/releases/download/ytl-ipa4/YouTubePlus_21.24.3_5.2.2.ipa",
-      "size": 128944853,
-      "versions": [
-        {
-          "version": "21.24.3",
-          "date": "2026-09-01T13:44:11Z",
-          "downloadURL": "https://github.com/mrdrvt99/YouProEXTRA/releases/download/ytl-ipa4/YouTubePlus_21.24.3_5.2.2.ipa",
-          "size": 128944853,
-          "localizedDescription": "YouTube Plus is a modified version of the official YouTube app with additional features including ad-blocking, background playback, Picture-in-Picture, download manager, and many more tweaks. This build includes YouPip, YTUHD, Return YouTube Dislikes, and other enhancements.",
-          "sourceCodeURL": "https://github.com/mrdrvt99/YouProEXTRA",
-          "sha256": "ea886361d67e65ec5e6017f9f378baa7eac47ffb705769ad8ff8abb1feae7a49",
-          "buildVersion": "5.2.2"
-        }
-      ]
     }
   ],
   "news": [],
-  "updated_at": "2026-09-09T13:58:02.902258Z",
-  "last_manual_run_reason": "fuckmew"
+  "updated_at": "2026-09-09T13:58:02.902258Z"
 }
