@@ -2,8 +2,8 @@
 """
 update_altstore_source.py
 
-Fetches the latest HyperLink and YouTube Plus IPAs from their GitHub
-Releases, then updates the SideStore/AltStore-compatible source JSON file.
+Fetches the latest HyperLink IPA from its GitHub Releases, then updates
+the SideStore/AltStore-compatible source JSON file.
 
 Environment variables:
   SOURCE_JSON_PATH    Path to the source JSON file (default: docs/public/v1/altstore-source.json)
@@ -37,19 +37,6 @@ APPS_CONFIG = [
         "sourceCodeURL": "https://github.com/trail-b1az3r/HyperNix-pip",
         "ipa_source": "release",  # Get IPA from GitHub Releases
     },
-    {
-        "name": "YouTube Plus",
-        "bundleIdentifier": "com.google.ios.youtube",
-        "developerName": "Google LLC (modified by zarzelworkshop)",
-        "subtitle": "Enhanced YouTube experience with extra features",
-        "localizedDescription": "YouTube Plus is a modified version of the official YouTube app with additional features including ad-blocking, background playback, Picture-in-Picture, download manager, and many more tweaks. This build includes YouPip, YTUHD, Return YouTube Dislikes, and other enhancements.",
-        "iconURL": "https://is1-ssl.mzstatic.com/image/thumb/Purple126/v6/97/45/ab/9745ab48-7f6e-cb98-d0cd-f6c9a8e7d4d5/logo_youtube_color-0-1x_U003emarketing-0-7-00-85-2.png/230x0w.webp",
-        "category": "entertainment",
-        "repo_owner": "mrdrvt99",
-        "repo_name": "YouProEXTRA",
-        "sourceCodeURL": "https://github.com/mrdrvt99/YouProEXTRA",
-        "ipa_source": "release",  # Get IPA from GitHub Releases
-    }
 ]
 
 # Standard AltStore/SideStore source format
@@ -229,15 +216,7 @@ def extract_version_from_ipa_name(ipa_name, app_name="App"):
             build_part = parts[1]
             return version_part, build_part
     
-    # Pattern 2: YouTubePlus_X.Y.Z_A.B.C.ipa
-    if "_" in base and "YouTubePlus" in base:
-        parts = base.split("_")
-        if len(parts) >= 3:
-            version_part = parts[1]  # e.g., 21.24.3
-            build_part = parts[2]    # e.g., 5.2.2
-            return version_part, build_part
-    
-    # Pattern 3: AppName-X.Y.Z.ipa or AppName-vX.Y.Z.ipa
+    # Pattern 2: AppName-X.Y.Z.ipa or AppName-vX.Y.Z.ipa
     import re
     match = re.search(r'[-_]?v?(\d+\.\d+\.?\d*)', base)
     if match:
