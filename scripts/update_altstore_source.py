@@ -2,13 +2,13 @@
 """
 update_altstore_source.py
 
-Fetches the latest HyperLink IPA from GitHub Actions artifacts and
-YouTube Plus IPA from GitHub Releases, then updates the SideStore/AltStore-compatible source JSON file.
+Fetches the latest HyperLink and YouTube Plus IPAs from their GitHub
+Releases, then updates the SideStore/AltStore-compatible source JSON file.
 
 Environment variables:
   SOURCE_JSON_PATH    Path to the source JSON file (default: docs/public/v1/altstore-source.json)
   MANUAL_RUN_REASON   Optional note when triggered via workflow_dispatch
-  GITHUB_TOKEN        GitHub token for API authentication (required for artifact access)
+  GITHUB_TOKEN        GitHub token for API authentication (avoids rate limiting)
 """
 
 import json
@@ -35,9 +35,7 @@ APPS_CONFIG = [
         "repo_owner": "trail-b1az3r",
         "repo_name": "HyperNix-pip",
         "sourceCodeURL": "https://github.com/trail-b1az3r/HyperNix-pip",
-        "ipa_source": "artifact",  # Get IPA from workflow artifacts
-        "workflow_id": "340345583",  # ios.yml workflow ID
-        "artifact_pattern": "hyperlink-ipa-",  # Look for artifacts starting with this pattern
+        "ipa_source": "release",  # Get IPA from GitHub Releases
     },
     {
         "name": "YouTube Plus",
@@ -283,7 +281,7 @@ def update_or_add_app(source, app_config, ipa_url, version, build_number, size_b
     # Create new version entry
     new_version = {
         "version": version,
-        "versionDate": release_date,
+        "date": release_date,
         "downloadURL": ipa_url,
         "size": size_bytes,
         "localizedDescription": app_config["localizedDescription"],
@@ -319,7 +317,7 @@ def update_or_add_app(source, app_config, ipa_url, version, build_number, size_b
         
         # Update app-level metadata
         existing_app["version"] = version
-        existing_app["versionDate"] = release_date
+        existing_app["date"] = release_date
         existing_app["downloadURL"] = ipa_url
         existing_app["size"] = size_bytes
         
@@ -329,7 +327,7 @@ def update_or_add_app(source, app_config, ipa_url, version, build_number, size_b
         # Create new app entry from config template
         new_app = {k: v for k, v in app_config.items() if k not in ['ipa_source', 'workflow_id', 'artifact_pattern']}
         new_app["version"] = version
-        new_app["versionDate"] = release_date
+        new_app["date"] = release_date
         new_app["downloadURL"] = ipa_url
         new_app["size"] = size_bytes
         new_app["versions"] = [new_version]
