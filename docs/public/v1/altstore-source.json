@@ -16,11 +16,21 @@
       "repo_owner": "trail-b1az3r",
       "repo_name": "HyperNix-pip",
       "sourceCodeURL": "https://github.com/trail-b1az3r/HyperNix-pip",
-      "version": "1.0.26.9.2.1",
-      "date": "2026-09-16T02:19:06Z",
-      "downloadURL": "https://github.com/trail-b1az3r/HyperNix-pip/releases/download/v0.72.5.dev3/HyperLink-1.0.26.9.2.1-b156-unsigned.ipa",
-      "size": 299766,
+      "version": "1.0.26.9.2.3",
+      "date": "2026-09-16T15:26:44Z",
+      "downloadURL": "https://github.com/trail-b1az3r/HyperNix-pip/releases/download/v0.72.5.post5/HyperLink-1.0.26.9.2.3-b163-unsigned.ipa",
+      "size": 648185,
       "versions": [
+        {
+          "version": "1.0.26.9.2.3",
+          "date": "2026-09-16T15:26:44Z",
+          "downloadURL": "https://github.com/trail-b1az3r/HyperNix-pip/releases/download/v0.72.5.post5/HyperLink-1.0.26.9.2.3-b163-unsigned.ipa",
+          "size": 648185,
+          "localizedDescription": "HyperLink is an iOS companion app that lets you chat with AI models running on your local machine. Connect over your home network or remotely via Tailscale. Send photos, upload files and code, and resolve Hugging Face GGUF links into real downloads.",
+          "sourceCodeURL": "https://github.com/trail-b1az3r/HyperNix-pip",
+          "sha256": "b816915e966c51c21543fbbf893521faa221d833fa9626d82860e786c7244095",
+          "buildVersion": "163"
+        },
         {
           "version": "1.0.26.9.2.1",
           "date": "2026-09-16T02:19:06Z",
@@ -60,21 +70,11 @@
           "sourceCodeURL": "https://github.com/trail-b1az3r/HyperNix-pip",
           "sha256": "777cc47f525165783ba383afd5d8f6a1cc00a99075d58d0c9b469c88f0c01ebf",
           "buildVersion": "152"
-        },
-        {
-          "version": "1.0.26.9.2.1",
-          "date": "2026-09-10T06:38:55Z",
-          "downloadURL": "https://github.com/trail-b1az3r/HyperNix-pip/releases/download/v0.72.4.post17/HyperLink-1.0.26.9.2.1-b151-unsigned.ipa",
-          "size": 299768,
-          "localizedDescription": "HyperLink is an iOS companion app that lets you chat with AI models running on your local machine. Connect over your home network or remotely via Tailscale. Send photos, upload files and code, and resolve Hugging Face GGUF links into real downloads.",
-          "sourceCodeURL": "https://github.com/trail-b1az3r/HyperNix-pip",
-          "sha256": "3c82c79ea9a6d6bfb02d3862a3b116cc14e07cd392d297d444d6e55bf66f1063",
-          "buildVersion": "151"
         }
       ]
     }
   ],
   "news": [],
-  "updated_at": "2026-09-16T02:59:12.764800Z",
+  "updated_at": "2026-09-16T16:14:30.044240Z",
   "last_manual_run_reason": "12"
 }
