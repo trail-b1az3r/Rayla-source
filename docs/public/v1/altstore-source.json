@@ -17,10 +17,20 @@
       "repo_name": "HyperNix-pip",
       "sourceCodeURL": "https://github.com/trail-b1az3r/HyperNix-pip",
       "version": "1.0.26.9.2.3",
-      "date": "2026-09-17T00:33:21Z",
-      "downloadURL": "https://github.com/trail-b1az3r/HyperNix-pip/releases/download/v0.72.5.post12/HyperLink-1.0.26.9.2.3-b171-unsigned.ipa",
-      "size": 3337313,
+      "date": "2026-09-17T01:52:19Z",
+      "downloadURL": "https://github.com/trail-b1az3r/HyperNix-pip/releases/download/v0.72.5.post13/HyperLink-1.0.26.9.2.3-b173-unsigned.ipa",
+      "size": 3354139,
       "versions": [
+        {
+          "version": "1.0.26.9.2.3",
+          "date": "2026-09-17T01:52:19Z",
+          "downloadURL": "https://github.com/trail-b1az3r/HyperNix-pip/releases/download/v0.72.5.post13/HyperLink-1.0.26.9.2.3-b173-unsigned.ipa",
+          "size": 3354139,
+          "localizedDescription": "HyperLink is an iOS companion app that lets you chat with AI models running on your local machine. Connect over your home network or remotely via Tailscale. Send photos, upload files and code, and resolve Hugging Face GGUF links into real downloads.",
+          "sourceCodeURL": "https://github.com/trail-b1az3r/HyperNix-pip",
+          "sha256": "8aff67a38439ab16d496d45a34d5ce8ea4e59dccf95b15817ccaf2458c08befd",
+          "buildVersion": "173"
+        },
         {
           "version": "1.0.26.9.2.3",
           "date": "2026-09-17T00:33:21Z",
@@ -60,21 +70,11 @@
           "sourceCodeURL": "https://github.com/trail-b1az3r/HyperNix-pip",
           "sha256": "b816915e966c51c21543fbbf893521faa221d833fa9626d82860e786c7244095",
           "buildVersion": "163"
-        },
-        {
-          "version": "1.0.26.9.2.1",
-          "date": "2026-09-16T02:19:06Z",
-          "downloadURL": "https://github.com/trail-b1az3r/HyperNix-pip/releases/download/v0.72.5.dev3/HyperLink-1.0.26.9.2.1-b156-unsigned.ipa",
-          "size": 299766,
-          "localizedDescription": "HyperLink is an iOS companion app that lets you chat with AI models running on your local machine. Connect over your home network or remotely via Tailscale. Send photos, upload files and code, and resolve Hugging Face GGUF links into real downloads.",
-          "sourceCodeURL": "https://github.com/trail-b1az3r/HyperNix-pip",
-          "sha256": "1d8e1660a59baecd024208af9c294c44bd28f39595c7bf53816e68e0ac396b3b",
-          "buildVersion": "156"
         }
       ]
     }
   ],
   "news": [],
-  "updated_at": "2026-09-17T00:34:13.494609Z",
-  "last_manual_run_reason": "12"
+  "updated_at": "2026-09-17T01:52:55.880349Z",
+  "last_manual_run_reason": "ddddd"
 }
