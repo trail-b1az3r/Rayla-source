@@ -48,15 +48,10 @@ This repository uses GitHub Actions to automatically update the AltStore/SideSto
 
 ### How It Works
 
-1. The workflow fetches the latest GitHub releases for each configured app
-2. Finds releases containing `.ipa` assets
-3. Downloads each IPA to calculate its SHA-256 checksum
-4. Updates the source JSON with:
-   - Latest version number
-   - Download URL
-   - File size
-   - SHA-256 hash
-   - Release date
+1. The workflow lists the app's recent GitHub releases that contain an `.ipa` asset
+2. Builds one version entry per release and merges it into the existing history (older versions are never dropped)
+3. Uses the release notes as the version's "What's New" text, or the commit messages since the previous release if the notes are empty
+4. Reuses stored SHA-256 hashes and downloads only new IPAs to hash them
 5. Commits changes only if updates were detected
 
 ### Manual Trigger
