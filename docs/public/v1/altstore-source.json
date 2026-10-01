@@ -26,7 +26,7 @@
           "date": "2026-10-01T14:09:19Z",
           "downloadURL": "https://github.com/trail-b1az3r/HyperNix-pip/releases/download/v0.72.6.post4/HyperLink-1.1.26.9.0.0-b194-unsigned.ipa",
           "size": 3619047,
-          "localizedDescription": "HyperLink is an iOS companion app that lets you chat with AI models running on your local machine. Connect over your home network or remotely via Tailscale. Send photos, upload files and code, and resolve Hugging Face GGUF links into real downloads.",
+          "localizedDescription": "## Changelog\n![PyPI - Downloads](https://img.shields.io/pypi/dm/hypernix)\n![PyPI - Version](https://img.shields.io/pypi/v/hypernix)\n\nCommits since the last stable release (`v0.72.6.post3`):\n\n- chore: refresh generated docs data and release summaries (5071a035)\n- release: 0.72.6.post4 -- its own changelog entry and version (11086864)\n- chore: refresh generated docs data and release summaries (fe0159c2)\n- hyped, hyped-pro and Neo Oven run models outside the catalog, in any layout (9d5186ed)\n- chore: update JSON stats (scheduled) (3327d117)\n- t1api: serve /inference from the HyperNix runner (4b7fe9d5)\n- convert: a Brewer model saved without config.json exports as llama, not hypernix (34ccaa58)\n- chore: refresh generated docs data and release summaries (022ee992)\n- chore: refresh generated docs data and release summaries (8bd42f6e)\n- Auto-update README header (hourly) (f6ab07fa)\n\n### HyperLink\n\nThe attached `HyperLink-*.ipa` is the companion iPhone app \u2014\nchat with the models on your own machine, over the LAN or a\ntailnet. It is **unsigned** unless this release was built with\nsigning secrets, so install it with AltStore, Sideloadly, or a\nfree Xcode profile. Verify it against `SHA256SUMS.ios`.\n\nNo IPA attached means the app build did not run this time; the\nPython package is unaffected.",
           "sourceCodeURL": "https://github.com/trail-b1az3r/HyperNix-pip",
           "sha256": "df77c35817281a9210ea1ced5bbe957a1270b0af6d7a68c12e07648e8b734026",
           "buildVersion": "194"
@@ -36,7 +36,7 @@
           "date": "2026-09-30T18:01:00Z",
           "downloadURL": "https://github.com/trail-b1az3r/HyperNix-pip/releases/download/v0.72.6.post3/HyperLink-1.1.26.9.0.0-b190-unsigned.ipa",
           "size": 3619050,
-          "localizedDescription": "HyperLink is an iOS companion app that lets you chat with AI models running on your local machine. Connect over your home network or remotely via Tailscale. Send photos, upload files and code, and resolve Hugging Face GGUF links into real downloads.",
+          "localizedDescription": "## Changelog\n![PyPI - Downloads](https://img.shields.io/pypi/dm/hypernix)\n![PyPI - Version](https://img.shields.io/pypi/v/hypernix)\n\nCommits since the last stable release (`v0.72.6.post2`):\n\n- chore: refresh generated docs data and release summaries (944653b2)\n- chore: refresh generated docs data and release summaries (cb1f8da8)\n- docs: /code in T1-API, the .env example and the changelog (16a3c07e)\n- t1api: /code \u2014 sandboxes that run code, with perms in the web settings grammar (858eefd0)\n- chore: refresh generated docs data and release summaries (f629743c)\n- chore: update JSON stats (scheduled) (4953798e)\n- doctor: check what the package needs now; runner: pick a llama.cpp that reads the model (e010f8c9)\n- docs: bring the native and scripts READMEs and every wiki page up to date (a939eaaa)\n- Nightly: stat-bot commits alone do not make a new nightly (d08461fb)\n- chore: refresh generated docs data and release summaries (efdd8f05)\n- public-release: nightly builds behind PUBLIC_RELEASE_NIGHTLY (ac96ea38)\n- HyperLink: symlinked models load, and models can be linked from the app (99636442)\n- hypernix convert -P -Q: safetensors to any hyprslug quant in one step (448bcc9d)\n- hyprslug: Q8_K, INT3, FP8, the hnx_Q6_H hybrids, and Brewer input (7e6e59a3)\n- hypernix-t1 launch-script: -1 'CMD' replaces -$ 'CMD' (fdb60dd8)\n- Security: make Codacy scan again, and clear most Bandit findings (99ddc1ae)\n- chore: refresh generated docs data and release summaries (c820b434)\n- Brewer models run in llama.cpp: a real GGUF export, and brew that works (bf1bcf1b)\n- chore: refresh generated docs data and release summaries (8a2f4c66)\n- chore: refresh generated docs data and release summaries (ead9fb5f)\n- chore: update JSON stats (scheduled) (3b2ceb7e)\n- chore: refresh generated docs data and release summaries (082ece75)\n- chore: refresh generated docs data and release summaries (7b95cbd3)\n- hypernix-t1 status: name an old copy on PATH that runs instead (a246201a)\n- hypernix-t1: hand over to the server venv's copy; status asks the server (e7f98176)\n- chore: refresh generated docs data and release summaries (a5a20755)\n- Update changelog link in Home.tsx (ef968f94)\n- Model sync: mirror T1_MODELS_SOURCE, not the download folder (216b2a30)\n- Model sync: mirror ~/.hypernix/models into ~/.hypernix/t1api/models (999d2e1b)\n- Docs: bring every T1 page up to date with the code (8459b58f)\n- hypernix-t1 upgrade, stale-venv warning, and finish the tests reorg (3c3bd1be)\n- tests: one folder per package (d0a33e29)\n- chore: refresh generated docs data and release summaries (bf80107d)\n- Auto-update README header (hourly) (444f0286)\n- tests: put every test folder on sys.path (d5cc39e3)\n- Security: safe checkpoint loading, MCP errors, key paths, and working scanners (b4381824)\n- chore: update JSON stats (scheduled) (6f47e333)\n- Security gate: fix the 16 Semgrep error findings (8de7d19d)\n- Delete .github/workflows/pysa.yml (c040916e)\n- Bandit: skip B101 (assert_used) under tests/ (b8e2e490)\n- 0",
           "sourceCodeURL": "https://github.com/trail-b1az3r/HyperNix-pip",
           "sha256": "de7691cf0fb18e1745cf56f634cffc2427bc54fd7375f8de7a06a10b9ecd039c",
           "buildVersion": "190"
@@ -46,7 +46,7 @@
           "date": "2026-09-27T21:33:45Z",
           "downloadURL": "https://github.com/trail-b1az3r/HyperNix-pip/releases/download/v0.72.6.post2/HyperLink-1.1.26.9.0.0-b186-unsigned.ipa",
           "size": 3604520,
-          "localizedDescription": "HyperLink is an iOS companion app that lets you chat with AI models running on your local machine. Connect over your home network or remotely via Tailscale. Send photos, upload files and code, and resolve Hugging Face GGUF links into real downloads.",
+          "localizedDescription": "## Changelog\n![PyPI - Downloads](https://img.shields.io/pypi/dm/hypernix)\n![PyPI - Version](https://img.shields.io/pypi/v/hypernix)\n\nCommits since the last stable release (`v0.72.6.post2`):\n\n\n### HyperLink\n\nThe attached `HyperLink-*.ipa` is the companion iPhone app \u2014\nchat with the models on your own machine, over the LAN or a\ntailnet. It is **unsigned** unless this release was built with\nsigning secrets, so install it with AltStore, Sideloadly, or a\nfree Xcode profile. Verify it against `SHA256SUMS.ios`.\n\nNo IPA attached means the app build did not run this time; the\nPython package is unaffected.",
           "sourceCodeURL": "https://github.com/trail-b1az3r/HyperNix-pip",
           "sha256": "b6f63e9eae7587f8469376df983c70c96219dc8320857649e64cbb19205ea90e",
           "buildVersion": "186"
@@ -56,7 +56,7 @@
           "date": "2026-09-27T07:19:11Z",
           "downloadURL": "https://github.com/trail-b1az3r/HyperNix-pip/releases/download/v0.72.6.post1/HyperLink-1.1.26.9.0.0-b184-unsigned.ipa",
           "size": 3604518,
-          "localizedDescription": "HyperLink is an iOS companion app that lets you chat with AI models running on your local machine. Connect over your home network or remotely via Tailscale. Send photos, upload files and code, and resolve Hugging Face GGUF links into real downloads.",
+          "localizedDescription": "## Changelog\n![PyPI - Downloads](https://img.shields.io/pypi/dm/hypernix)\n![PyPI - Version](https://img.shields.io/pypi/v/hypernix)\n\nCommits since the last stable release (`v0.72.6`):\n\n- Modify pip install to include 't1api' extra (43b0c4d0)\n- Add 't1api' to editable install in CI workflow (9cad38dc)\n- Pages changelog: read the changelog guide's format (f100cd49)\n- 0.72.6.post1: changelog entry in the updated changelog guide's format (4523433d)\n- 0.72.6.post1: changelog and docs for HyperLink on the web and the LM Studio move (e37af407)\n- HyperLink on the web: dark mode (f67439a9)\n- HyperLink on the web: the T1 server hosts it on port 37965 (59c7a9f4)\n- chore: refresh generated docs data and release summaries (6fcb21b0)\n- HyperLink: move LM Studio's model onto the HyperNix runner (bf44cc7e)\n- HyperLink: teach the model when to use its tools, not only the format (8147b3b8)\n- 0.72.6.post1: version, changelog and docs; simpler path guards (ddf4092f)\n- Runner: serve native HyperNix models; HyperNix.3-mini is the default (1c244db8)\n- HyperLink: tool calls from the models people actually run (43e651df)\n- Fix the high-rated security findings (eb12198c)\n- hypernix-t1 runner finds the server where `start` put it; add `hypernix-t1 chat` (fa59f481)\n- chore: update JSON stats (scheduled) (da66a27b)\n- chore: refresh generated docs data and release summaries (305e5341)\n- chore: refresh generated docs data and release summaries (65cb6f12)\n- chore: refresh generated docs data and release summaries (cd41dd5b)\n- chore: refresh generated docs data and release summaries (fd97dc20)\n- chore: refresh generated docs data and release summaries (83cdcbdd)\n- chore: refresh generated docs data and release summaries (e638e8f8)\n- chore: update JSON stats (scheduled) (e41dc454)\n- Add files via upload (f2e6ca16)\n- Add files via upload (c3cc1ee2)\n- Potential fix for code scanning alert no. 26263: Full server-side request forgery (3c3c3c47)\n- chore: refresh generated docs data and release summaries (b27ce49f)\n- chore: refresh generated docs data and release summaries (6fd7fe0d)\n- Add Pysa workflow for static analysis (d59a288c)\n- Refactor net.py for improved command handling (9262ff74)\n- chore: refresh generated docs data and release summaries (5f0c0d47)\n- chore: refresh generated docs data and release summaries (04199056)\n- Fix command injection risks in network manager (118a601d)\n- Potential fix for code scanning alert no. 26263: Full server-side request forgery (7f46b1c5)\n- Update changelog to clarify upgrade safety (7608cc89)\n- ruff ruff (3ea2ce05)\n- site changes (f3299fd8)\n- Update changelog with patch release format (5f0c9d9d)\n- Improve changelog guide formatting and release categories (8b6d512d)\n- chore: update generated API and code stats (8c28f3cc)\n- chore: update JSON stats (scheduled) (0cbad950)\n- chore: update generated API and code stats (39ecac0c)\n- chore: update generated API and code stats (b0a9b10e)\n- chore: update generated API and code stats (e547a061)\n- Auto-u",
           "sourceCodeURL": "https://github.com/trail-b1az3r/HyperNix-pip",
           "sha256": "e59232b662b2d842e469d0bcf96be5ab4f80b0732e36fbf59877372e8f71fa9c",
           "buildVersion": "184"
@@ -66,15 +66,155 @@
           "date": "2026-09-24T06:18:41Z",
           "downloadURL": "https://github.com/trail-b1az3r/HyperNix-pip/releases/download/v0.72.6/HyperLink-1.1.26.9.0.0-b181-unsigned.ipa",
           "size": 3596925,
-          "localizedDescription": "HyperLink is an iOS companion app that lets you chat with AI models running on your local machine. Connect over your home network or remotely via Tailscale. Send photos, upload files and code, and resolve Hugging Face GGUF links into real downloads.",
+          "localizedDescription": "## Changelog\n![PyPI - Downloads](https://img.shields.io/pypi/dm/hypernix)\n![PyPI - Version](https://img.shields.io/pypi/v/hypernix)\n\nCommits since the last stable release (`v0.72.5.post13`):\n\n- release: the push retry no longer mistakes a dirty tree for a conflict (d4798650)\n- chore: update generated API and code stats (ddaedee0)\n- HyperLink: memories sync from the server as they change (3fc645bf)\n- 0.72.6: a release its own tests would reject cannot be started (6abb9484)\n- tvtop-max: never a blank screen; a bounded log search that finds .runs (32762dfc)\n- hypernix v0.72.6.rc3 [skip ci] (84d28c42)\n- HyperLink: the assistant's bubble tail no longer punches a hole in it (92406910)\n- 0.72.6.rc3: a HyperLink model has its tools on the route the app uses (471493b0)\n- chore: update generated API and code stats (39faa5ae)\n- hypernix v0.72.6.rc2 [skip ci] (982f0924)\n- chore: update JSON stats (scheduled) (dfb2baef)\n- 0.72.6.rc2: tvtop-max, and HyperLink's default system prompt (c81b29d2)\n- HyperLink Siri: say what the phrases match, and name models as they are said (25d5540b)\n- hypernix v0.72.6.rc1 [skip ci] (bcff04be)\n- 0.72.6.rc1: prepare the tree, and fix what the first release run hit (848cfa6a)\n- chore: update generated API and code stats (8b5c6781)\n- 0.72.6 pt4 docs: every page current, and a test that keeps them so (4e0dfcb8)\n- HyperLink: Siri on App Intents entities, so chats and models can be named (fd74589c)\n- waiter serv: grouped letters, -b, and -u -k -c -T -Y -S -e (4d38d85a)\n- t1sdk: server info, conceal, and v2.1 kits as a credential (c76677db)\n- T1: conceal mode with 36-hour retention, and a public /server/info (0068bbf2)\n- hyped-pro finds the T1 server, and says what to do when nothing answers (1869a8b9)\n- HyperLink shell: the root check is one plain prefix test (541d7839)\n- desktop: one SettingsView entry, not two (f0e4ce13)\n- Windows: the editor keeps line endings, the disk panel works, tvtop++ stops rescanning processes (6576f39d)\n- chore: update generated API and code stats (2ad71b99)\n- Update CMakeLists.txt (5a1c0713)\n- v2.1 (T2C) keys, sealed with Rotorvault (462b479d)\n- ci: Studio embeds SettingsView; public-only fetches connect to the checked address (0d427c97)\n- HyperLink shell: the working directory stays inside one root (848aac65)\n- hnx-t1: the short name for hypernix-t1; help no longer runs a command (3b4a5b9c)\n- HyperLink: model titles, compression, private chats, organised memory, images, shell, tails (e26841fc)\n- ci: GCC 11 rejects [[maybe_unused]] on a member; no exception text from summarise (bf80987c)\n- hyped-pro: git, a file editor, and consent that reaches the person (73dd59fd)\n- ci: magnesium without psutil, Windows paths, and CodeQL's findings (6066ce53)\n- chore: update generated API and code stats (b2d8b5e3)\n- chore: update generated API and code stats (23ae830b)\n- 0.72.6 pt3: hyped-pro on OpenTUI; hyped-plus keeps the readline TUI (6a41067f)\n- 0.72.6 pt3: T1 tools for local models, and HyperLink swipe, memories, s",
           "sourceCodeURL": "https://github.com/trail-b1az3r/HyperNix-pip",
           "sha256": "9146e520cd1642af4a844e91d90230d916301305f0410f44e09f47e4888bf86e",
           "buildVersion": "181"
+        },
+        {
+          "version": "1.0.26.9.2.3",
+          "date": "2026-09-17T01:52:19Z",
+          "downloadURL": "https://github.com/trail-b1az3r/HyperNix-pip/releases/download/v0.72.5.post13/HyperLink-1.0.26.9.2.3-b173-unsigned.ipa",
+          "size": 3354139,
+          "localizedDescription": "## Changelog\n![PyPI - Downloads](https://img.shields.io/pypi/dm/hypernix)\n![PyPI - Version](https://img.shields.io/pypi/v/hypernix)\n\nCommits since the last stable release (`v0.72.5.post12`):\n\n- tests: the refusal names a command that exists (6c8fe0fa)\n- Auto-update README header (hourly) (4182dabd)\n- hyperlink: add and re-port a server; hypernix-t1 built-in-runner start (792c5d27)\n\n### HyperLink\n\nThe attached `HyperLink-*.ipa` is the companion iPhone app \u2014\nchat with the models on your own machine, over the LAN or a\ntailnet. It is **unsigned** unless this release was built with\nsigning secrets, so install it with AltStore, Sideloadly, or a\nfree Xcode profile. Verify it against `SHA256SUMS.ios`.\n\nNo IPA attached means the app build did not run this time; the\nPython package is unaffected.",
+          "sourceCodeURL": "https://github.com/trail-b1az3r/HyperNix-pip",
+          "sha256": "8aff67a38439ab16d496d45a34d5ce8ea4e59dccf95b15817ccaf2458c08befd",
+          "buildVersion": "173"
+        },
+        {
+          "version": "1.0.26.9.2.3",
+          "date": "2026-09-17T00:33:21Z",
+          "downloadURL": "https://github.com/trail-b1az3r/HyperNix-pip/releases/download/v0.72.5.post12/HyperLink-1.0.26.9.2.3-b171-unsigned.ipa",
+          "size": 3337313,
+          "localizedDescription": "## Changelog\n![PyPI - Downloads](https://img.shields.io/pypi/dm/hypernix)\n![PyPI - Version](https://img.shields.io/pypi/v/hypernix)\n\nCommits since the last stable release (`v0.72.5.post11`):\n\n- hyperlink: settings that could not be saved (f49a394b)\n\n### HyperLink\n\nThe attached `HyperLink-*.ipa` is the companion iPhone app \u2014\nchat with the models on your own machine, over the LAN or a\ntailnet. It is **unsigned** unless this release was built with\nsigning secrets, so install it with AltStore, Sideloadly, or a\nfree Xcode profile. Verify it against `SHA256SUMS.ios`.\n\nNo IPA attached means the app build did not run this time; the\nPython package is unaffected.",
+          "sourceCodeURL": "https://github.com/trail-b1az3r/HyperNix-pip",
+          "sha256": "5e0ea1257633936f43f4af98b2fb6ee773ac1c91ef37830926338916f7bca5fd",
+          "buildVersion": "171"
+        },
+        {
+          "version": "1.0.26.9.2.3",
+          "date": "2026-09-16T23:44:26Z",
+          "downloadURL": "https://github.com/trail-b1az3r/HyperNix-pip/releases/download/v0.72.5.post11/HyperLink-1.0.26.9.2.3-b170-unsigned.ipa",
+          "size": 3332279,
+          "localizedDescription": "## Changelog\n![PyPI - Downloads](https://img.shields.io/pypi/dm/hypernix)\n![PyPI - Version](https://img.shields.io/pypi/v/hypernix)\n\nCommits since the last stable release (`v0.72.5.post10`):\n\n- chore: update JSON stats (scheduled) (e9e53197)\n- models: reconcile \"Models registered 44\" with an empty picker (46047fec)\n- t1api: add GET /version, and stop a stale process looking like a wrong number (a75a750b)\n- models: say where the scan looked and what was in there (aad95131)\n\n### HyperLink\n\nThe attached `HyperLink-*.ipa` is the companion iPhone app \u2014\nchat with the models on your own machine, over the LAN or a\ntailnet. It is **unsigned** unless this release was built with\nsigning secrets, so install it with AltStore, Sideloadly, or a\nfree Xcode profile. Verify it against `SHA256SUMS.ios`.\n\nNo IPA attached means the app build did not run this time; the\nPython package is unaffected.",
+          "sourceCodeURL": "https://github.com/trail-b1az3r/HyperNix-pip",
+          "sha256": "0ea02f46cef8998a541f808be9f3b1206af7a2bc9ec01fed472c9b0c9517677f",
+          "buildVersion": "170"
+        },
+        {
+          "version": "1.0.26.9.2.3",
+          "date": "2026-09-16T22:25:27Z",
+          "downloadURL": "https://github.com/trail-b1az3r/HyperNix-pip/releases/download/v0.72.5.post10/HyperLink-1.0.26.9.2.3-b169-unsigned.ipa",
+          "size": 3326841,
+          "localizedDescription": "## Changelog\n![PyPI - Downloads](https://img.shields.io/pypi/dm/hypernix)\n![PyPI - Version](https://img.shields.io/pypi/v/hypernix)\n\nCommits since the last stable release (`v0.72.5.post9`):\n\n- models: say where the scan looked and what was in there (9c98a24d)\n- Auto-update README header (hourly) (6ab301e3)\n\n### HyperLink\n\nThe attached `HyperLink-*.ipa` is the companion iPhone app \u2014\nchat with the models on your own machine, over the LAN or a\ntailnet. It is **unsigned** unless this release was built with\nsigning secrets, so install it with AltStore, Sideloadly, or a\nfree Xcode profile. Verify it against `SHA256SUMS.ios`.\n\nNo IPA attached means the app build did not run this time; the\nPython package is unaffected.",
+          "sourceCodeURL": "https://github.com/trail-b1az3r/HyperNix-pip",
+          "sha256": "2ca14a932c9686e0f76a339989c85f925c9b58b2c499f8d74bfa92a21f44d766",
+          "buildVersion": "169"
+        },
+        {
+          "version": "1.0.26.9.2.3",
+          "date": "2026-09-16T20:38:06Z",
+          "downloadURL": "https://github.com/trail-b1az3r/HyperNix-pip/releases/download/v0.72.5.post9/HyperLink-1.0.26.9.2.3-b168-unsigned.ipa",
+          "size": 3324927,
+          "localizedDescription": "## Changelog\n![PyPI - Downloads](https://img.shields.io/pypi/dm/hypernix)\n![PyPI - Version](https://img.shields.io/pypi/v/hypernix)\n\nCommits since the last stable release (`v0.72.5.post8`):\n\n- ci: put the framework verdict in the summary too (d5d9b874)\n- ios: embed llama.framework, which is dynamic (99b86743)\n- docs: the entitlement did not cause the crash (2ade3a1f)\n- Auto-update README header (hourly) (7de3d059)\n- ci: say in the summary what the shipped bundle carried (5ae0e1f1)\n\n### HyperLink\n\nThe attached `HyperLink-*.ipa` is the companion iPhone app \u2014\nchat with the models on your own machine, over the LAN or a\ntailnet. It is **unsigned** unless this release was built with\nsigning secrets, so install it with AltStore, Sideloadly, or a\nfree Xcode profile. Verify it against `SHA256SUMS.ios`.\n\nNo IPA attached means the app build did not run this time; the\nPython package is unaffected.",
+          "sourceCodeURL": "https://github.com/trail-b1az3r/HyperNix-pip",
+          "sha256": "7c5bf8e8410e37cbde058227e17e424d8df4472aee9cded2b2e74a6755c9e2c0",
+          "buildVersion": "168"
+        },
+        {
+          "version": "1.0.26.9.2.3",
+          "date": "2026-09-16T17:53:05Z",
+          "downloadURL": "https://github.com/trail-b1az3r/HyperNix-pip/releases/download/v0.72.5.post8/HyperLink-1.0.26.9.2.3-b167-unsigned.ipa",
+          "size": 648201,
+          "localizedDescription": "## Changelog\n![PyPI - Downloads](https://img.shields.io/pypi/dm/hypernix)\n![PyPI - Version](https://img.shields.io/pypi/v/hypernix)\n\nCommits since the last stable release (`v0.72.5.post6`):\n\n- ci: a check that cannot fail is not coverage (726ddb59)\n- ios: the launch test raced the simulator, and lost (fc4b7d21)\n- ci: main's iOS builds were cancelling each other (e2fdb084)\n\n### HyperLink\n\nThe attached `HyperLink-*.ipa` is the companion iPhone app \u2014\nchat with the models on your own machine, over the LAN or a\ntailnet. It is **unsigned** unless this release was built with\nsigning secrets, so install it with AltStore, Sideloadly, or a\nfree Xcode profile. Verify it against `SHA256SUMS.ios`.\n\nNo IPA attached means the app build did not run this time; the\nPython package is unaffected.",
+          "sourceCodeURL": "https://github.com/trail-b1az3r/HyperNix-pip",
+          "sha256": "24bcab6cc82b0d11043fdac9783ef535226de93b131d98a7e3f236b1d06b1fa5",
+          "buildVersion": "167"
+        },
+        {
+          "version": "1.0.26.9.2.3",
+          "date": "2026-09-16T15:26:44Z",
+          "downloadURL": "https://github.com/trail-b1az3r/HyperNix-pip/releases/download/v0.72.5.post5/HyperLink-1.0.26.9.2.3-b163-unsigned.ipa",
+          "size": 648185,
+          "localizedDescription": "## Changelog\n![PyPI - Downloads](https://img.shields.io/pypi/dm/hypernix)\n![PyPI - Version](https://img.shields.io/pypi/v/hypernix)\n\nCommits since the last stable release (`v0.72.5.post4`):\n\n- tests: the blanking tests described a session the code never saw (e72a66ea)\n- ios: a Siri phrase cannot name a String parameter (d5612d45)\n\n### HyperLink\n\nThe attached `HyperLink-*.ipa` is the companion iPhone app \u2014\nchat with the models on your own machine, over the LAN or a\ntailnet. It is **unsigned** unless this release was built with\nsigning secrets, so install it with AltStore, Sideloadly, or a\nfree Xcode profile. Verify it against `SHA256SUMS.ios`.\n\nNo IPA attached means the app build did not run this time; the\nPython package is unaffected.",
+          "sourceCodeURL": "https://github.com/trail-b1az3r/HyperNix-pip",
+          "sha256": "b816915e966c51c21543fbbf893521faa221d833fa9626d82860e786c7244095",
+          "buildVersion": "163"
+        },
+        {
+          "version": "1.0.26.9.2.1",
+          "date": "2026-09-16T02:19:06Z",
+          "downloadURL": "https://github.com/trail-b1az3r/HyperNix-pip/releases/download/v0.72.5.dev3/HyperLink-1.0.26.9.2.1-b156-unsigned.ipa",
+          "size": 299766,
+          "localizedDescription": "## Changelog\n![PyPI - Downloads](https://img.shields.io/pypi/dm/hypernix)\n![PyPI - Version](https://img.shields.io/pypi/v/hypernix)\n\nCommits since the last stable release (`v0.72.5.dev2`):\n\n- chore: update JSON stats (scheduled) (96ec0b03)\n\n### HyperLink\n\nThe attached `HyperLink-*.ipa` is the companion iPhone app \u2014\nchat with the models on your own machine, over the LAN or a\ntailnet. It is **unsigned** unless this release was built with\nsigning secrets, so install it with AltStore, Sideloadly, or a\nfree Xcode profile. Verify it against `SHA256SUMS.ios`.\n\nNo IPA attached means the app build did not run this time; the\nPython package is unaffected.",
+          "sourceCodeURL": "https://github.com/trail-b1az3r/HyperNix-pip",
+          "sha256": "1d8e1660a59baecd024208af9c294c44bd28f39595c7bf53816e68e0ac396b3b",
+          "buildVersion": "156"
+        },
+        {
+          "version": "1.0.26.9.2.1",
+          "date": "2026-09-12T00:47:43Z",
+          "downloadURL": "https://github.com/trail-b1az3r/HyperNix-pip/releases/download/v0.72.5.dev1/HyperLink-1.0.26.9.2.1-b154-unsigned.ipa",
+          "size": 299768,
+          "localizedDescription": "## Changelog\n![PyPI - Downloads](https://img.shields.io/pypi/dm/hypernix)\n![PyPI - Version](https://img.shields.io/pypi/v/hypernix)\n\nCommits since the last stable release (`v0.72.4.post20`):\n\n- Document package layout and module organization (1a789b6a)\n- chore: update JSON stats (scheduled) (1fb16430)\n- Auto-update README header (hourly) (2b300329)\n- 0.72.5 \u2014 hnx_1375bit, and quantisation-aware training (9cc43526)\n- 0.72.4.post21 \u2014 why both tiers gave a 1.4 GB file (ccbf43ee)\n- Update pyproject.toml (e463bdef)\n- Update pyproject.toml (137dacc8)\n- Update pyproject.toml (ccf76868)\n\n### HyperLink\n\nThe attached `HyperLink-*.ipa` is the companion iPhone app \u2014\nchat with the models on your own machine, over the LAN or a\ntailnet. It is **unsigned** unless this release was built with\nsigning secrets, so install it with AltStore, Sideloadly, or a\nfree Xcode profile. Verify it against `SHA256SUMS.ios`.\n\nNo IPA attached means the app build did not run this time; the\nPython package is unaffected.",
+          "sourceCodeURL": "https://github.com/trail-b1az3r/HyperNix-pip",
+          "sha256": "ba9a5e7e77d96d0c7f092c04a11bcead88ac93b34174b59787f0b8c135595145",
+          "buildVersion": "154"
+        },
+        {
+          "version": "1.0.26.9.2.1",
+          "date": "2026-09-11T00:03:51Z",
+          "downloadURL": "https://github.com/trail-b1az3r/HyperNix-pip/releases/download/v0.72.4.post20/HyperLink-1.0.26.9.2.1-b153-unsigned.ipa",
+          "size": 299769,
+          "localizedDescription": "## Changelog\n![PyPI - Downloads](https://img.shields.io/pypi/dm/hypernix)\n![PyPI - Version](https://img.shields.io/pypi/v/hypernix)\n\nCommits since the last stable release (`v0.72.4.post18`):\n\n- chore: update JSON stats (scheduled) (845cf628)\n- 0.72.4.post20 \u2014 status did not know about the autostart service (99f6b87f)\n- 0.72.4.post19 \u2014 start was reporting someone else's server (fc08f185)\n- Auto-update README header (hourly) (cbf7a1fd)\n\n### HyperLink\n\nThe attached `HyperLink-*.ipa` is the companion iPhone app \u2014\nchat with the models on your own machine, over the LAN or a\ntailnet. It is **unsigned** unless this release was built with\nsigning secrets, so install it with AltStore, Sideloadly, or a\nfree Xcode profile. Verify it against `SHA256SUMS.ios`.\n\nNo IPA attached means the app build did not run this time; the\nPython package is unaffected.",
+          "sourceCodeURL": "https://github.com/trail-b1az3r/HyperNix-pip",
+          "sha256": "34f9fd557ef20cbc5b07cd9d1fe5bf59a6f4215c65fde3cbfbfb0a54dbe7527e",
+          "buildVersion": "153"
+        },
+        {
+          "version": "1.0.26.9.2.1",
+          "date": "2026-09-10T17:59:50Z",
+          "downloadURL": "https://github.com/trail-b1az3r/HyperNix-pip/releases/download/v0.72.4.post18/HyperLink-1.0.26.9.2.1-b152-unsigned.ipa",
+          "size": 299769,
+          "localizedDescription": "## Changelog\n![PyPI - Downloads](https://img.shields.io/pypi/dm/hypernix)\n![PyPI - Version](https://img.shields.io/pypi/v/hypernix)\n\nCommits since the last stable release (`v0.72.4.post17`):\n\n- 0.72.4.post18 \u2014 Brewer attention was not causal (8ff6b497)\n- Auto-update README header (hourly) (35b0dd90)\n\n### HyperLink\n\nThe attached `HyperLink-*.ipa` is the companion iPhone app \u2014\nchat with the models on your own machine, over the LAN or a\ntailnet. It is **unsigned** unless this release was built with\nsigning secrets, so install it with AltStore, Sideloadly, or a\nfree Xcode profile. Verify it against `SHA256SUMS.ios`.\n\nNo IPA attached means the app build did not run this time; the\nPython package is unaffected.",
+          "sourceCodeURL": "https://github.com/trail-b1az3r/HyperNix-pip",
+          "sha256": "777cc47f525165783ba383afd5d8f6a1cc00a99075d58d0c9b469c88f0c01ebf",
+          "buildVersion": "152"
+        },
+        {
+          "version": "1.0.26.9.2.1",
+          "date": "2026-09-10T06:38:55Z",
+          "downloadURL": "https://github.com/trail-b1az3r/HyperNix-pip/releases/download/v0.72.4.post17/HyperLink-1.0.26.9.2.1-b151-unsigned.ipa",
+          "size": 299768,
+          "localizedDescription": "## Changelog\n![PyPI - Downloads](https://img.shields.io/pypi/dm/hypernix)\n![PyPI - Version](https://img.shields.io/pypi/v/hypernix)\n\nCommits since the last stable release (`v0.72.4.post16`):\n\n- 0.72.4.post17 \u2014 check and repair the files already written (28d01459)\n\n### HyperLink\n\nThe attached `HyperLink-*.ipa` is the companion iPhone app \u2014\nchat with the models on your own machine, over the LAN or a\ntailnet. It is **unsigned** unless this release was built with\nsigning secrets, so install it with AltStore, Sideloadly, or a\nfree Xcode profile. Verify it against `SHA256SUMS.ios`.\n\nNo IPA attached means the app build did not run this time; the\nPython package is unaffected.",
+          "sourceCodeURL": "https://github.com/trail-b1az3r/HyperNix-pip",
+          "sha256": "3c82c79ea9a6d6bfb02d3862a3b116cc14e07cd392d297d444d6e55bf66f1063",
+          "buildVersion": "151"
+        },
+        {
+          "version": "1.0.26.9.2.1",
+          "date": "2026-09-10T05:53:14Z",
+          "downloadURL": "https://github.com/trail-b1az3r/HyperNix-pip/releases/download/v0.72.4.post16/HyperLink-1.0.26.9.2.1-b150-unsigned.ipa",
+          "size": 299767,
+          "localizedDescription": "## Changelog\n![PyPI - Downloads](https://img.shields.io/pypi/dm/hypernix)\n![PyPI - Version](https://img.shields.io/pypi/v/hypernix)\n\nCommits since the last stable release (`v0.72.4.post14`):\n\n- 0.72.4.post16 \u2014 ne[0], not the element count (ff4dca46)\n- Auto-update README header (hourly) (0fd4adc2)\n- 0.72.4.post15 \u2014 SecTask is macOS-only (4a3a7aa2)\n\n### HyperLink\n\nThe attached `HyperLink-*.ipa` is the companion iPhone app \u2014\nchat with the models on your own machine, over the LAN or a\ntailnet. It is **unsigned** unless this release was built with\nsigning secrets, so install it with AltStore, Sideloadly, or a\nfree Xcode profile. Verify it against `SHA256SUMS.ios`.\n\nNo IPA attached means the app build did not run this time; the\nPython package is unaffected.",
+          "sourceCodeURL": "https://github.com/trail-b1az3r/HyperNix-pip",
+          "sha256": "9f8c394e1ce3f1f0ff06ea0d2b8509e0d469a26fcff268151177d3b44956a765",
+          "buildVersion": "150"
+        },
+        {
+          "version": "1.0.26.9.2.1",
+          "date": "2026-09-09T20:31:50Z",
+          "downloadURL": "https://github.com/trail-b1az3r/HyperNix-pip/releases/download/v0.72.4.post3/HyperLink-1.0.26.9.2.1-b143-unsigned.ipa",
+          "size": 267612,
+          "localizedDescription": "## Changelog\n![PyPI - Downloads](https://img.shields.io/pypi/dm/hypernix)\n![PyPI - Version](https://img.shields.io/pypi/v/hypernix)\n\nCommits since the last stable release (`v0.72.4.post1`):\n\n- 0.72.4.post2 \u2014 rebase onto the released main (c29c77d)\n- 0.72.4.dev13 \u2014 the pinned llama.cpp had stopped compiling (c375b0d)\n- 0.72.4.dev12 \u2014 Studio runs models itself, with no server (2ead0f2)\n- Auto-update README header (hourly) (6a02fc0)\n\n### HyperLink\n\nThe attached `HyperLink-*.ipa` is the companion iPhone app \u2014\nchat with the models on your own machine, over the LAN or a\ntailnet. It is **unsigned** unless this release was built with\nsigning secrets, so install it with AltStore, Sideloadly, or a\nfree Xcode profile. Verify it against `SHA256SUMS.ios`.\n\nNo IPA attached means the app build did not run this time; the\nPython package is unaffected.",
+          "sourceCodeURL": "https://github.com/trail-b1az3r/HyperNix-pip",
+          "sha256": "5cc29aa0e3705f45b59c140f049921cb058905f3add4141c1fdd338b7d0aafb8",
+          "buildVersion": "143"
         }
       ]
     }
   ],
   "news": [],
-  "updated_at": "2026-10-01T14:17:51.690949Z",
+  "updated_at": "2026-10-01T14:24:48.206568Z",
   "last_manual_run_reason": "ddddd"
 }
