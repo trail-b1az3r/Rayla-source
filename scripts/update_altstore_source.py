@@ -108,6 +108,118 @@ def get_latest_release_with_ipa(repo_owner, repo_name):
         return None, None
 
 
+MAX_RELEASES = 30
+MAX_NOTES_CHARS = 3000
+
+
+def list_releases(repo_owner, repo_name):
+    """Return published (non-draft, non-prerelease) releases, newest first."""
+    releases = fetch_json(
+        f"https://api.github.com/repos/{repo_owner}/{repo_name}/releases?per_page={MAX_RELEASES}",
+        require_auth=True,
+    )
+    return [r for r in releases if not r.get("draft") and not r.get("prerelease")]
+
+
+def build_release_notes(repo_owner, repo_name, release, previous_release):
+    """
+    Changelog text for a release: its release notes if it has any, otherwise the
+    commit subjects between the previous release tag and this one.
+    """
+    body = (release.get("body") or "").replace("\r\n", "\n").strip()
+    if body:
+        return body[:MAX_NOTES_CHARS]
+
+    if previous_release:
+        base = previous_release.get("tag_name")
+        head = release.get("tag_name")
+        try:
+            cmp = fetch_json(
+                f"https://api.github.com/repos/{repo_owner}/{repo_name}/compare/{base}...{head}",
+                require_auth=True,
+            )
+            subjects = [
+                c["commit"]["message"].split("\n", 1)[0].strip()
+                for c in reversed(cmp.get("commits", []))
+            ]
+            subjects = [m for m in subjects if m and not m.startswith("Merge ")]
+            if subjects:
+                return "\n".join(f"- {m}" for m in subjects)[:MAX_NOTES_CHARS]
+        except Exception as e:
+            print(f"warning: could not compare {base}...{head}: {e}", file=sys.stderr)
+    return ""
+
+
+def sync_release_history(source, app_config):
+    """
+    Rebuild the app's version list from its GitHub releases, keeping every
+    version already in the source. Returns True if anything changed.
+    """
+    app_name = app_config["name"]
+    owner, repo = app_config["repo_owner"], app_config["repo_name"]
+    releases = list_releases(owner, repo)
+
+    apps = source.setdefault("apps", [])
+    app = next((a for a in apps if a.get("bundleIdentifier") == app_config["bundleIdentifier"]), None)
+    existing = {v.get("downloadURL"): v for v in (app or {}).get("versions", [])}
+
+    fetched = []
+    for i, release in enumerate(releases):
+        asset = next((a for a in release.get("assets", []) if a.get("name", "").endswith(".ipa")), None)
+        if not asset:
+            continue
+        url = asset["browser_download_url"]
+        previous = releases[i + 1] if i + 1 < len(releases) else None
+        notes = build_release_notes(owner, repo, release, previous)
+
+        old = existing.get(url)
+        version, build = extract_version_from_ipa_name(asset["name"], app_name)
+        entry = {
+            "version": version,
+            "date": release.get("published_at") or datetime.now(timezone.utc).strftime("%Y-%m-%dT%H:%M:%SZ"),
+            "downloadURL": url,
+            "size": asset.get("size", 0),
+            "localizedDescription": notes or app_config["localizedDescription"],
+            "sourceCodeURL": app_config["sourceCodeURL"],
+        }
+        sha = old.get("sha256") if old else None
+        if not sha:
+            digest = asset.get("digest") or ""
+            if digest.startswith("sha256:"):
+                sha = digest[len("sha256:"):]
+        if not sha:
+            try:
+                print(f"[{app_name}] Downloading {asset['name']} to calculate SHA-256...")
+                sha = calculate_sha256(fetch_url_content(url))
+            except Exception as e:
+                print(f"[{app_name}] warning: could not hash {asset['name']}: {e}", file=sys.stderr)
+        if sha:
+            entry["sha256"] = sha
+        entry["buildVersion"] = build
+        fetched.append(entry)
+
+    if not fetched:
+        raise RuntimeError("no release with an IPA asset found")
+
+    # Keep history: versions no longer in the fetched window stay in the list.
+    fetched_urls = {e["downloadURL"] for e in fetched}
+    kept = [v for u, v in existing.items() if u not in fetched_urls]
+    versions = sorted(fetched + kept, key=lambda v: v.get("date", ""), reverse=True)
+
+    if app is not None and app.get("versions") == versions:
+        print(f"No update needed: {app_name} history is already current ({len(versions)} versions)")
+        return False
+
+    latest = versions[0]
+    if app is None:
+        app = {k: v for k, v in app_config.items() if k not in ("ipa_source", "workflow_id", "artifact_pattern")}
+        apps.append(app)
+    app.update(version=latest["version"], date=latest["date"], downloadURL=latest["downloadURL"], size=latest["size"])
+    app["versions"] = versions
+    print(f"Synced {app_name}: {len(versions)} versions, latest {latest['version']} (build {latest.get('buildVersion')})")
+    return True
+
+
 def get_latest_artifact_ipa(repo_owner, repo_name, workflow_id, artifact_pattern=""):
     """
     Fetch the latest successful workflow run and its artifact containing the IPA.
@@ -290,10 +402,6 @@ def update_or_add_app(source, app_config, ipa_url, version, build_number, size_b
         # Prepend new version to the front of the versions array
         existing_app["versions"].insert(0, new_version)
         
-        # Keep only the last 5 versions to avoid bloating the source
-        if len(existing_app["versions"]) > 5:
-            existing_app["versions"] = existing_app["versions"][:5]
-        
         # Update app-level metadata
         existing_app["version"] = version
         existing_app["date"] = release_date
@@ -325,7 +433,12 @@ def main():
     
     updated_apps = []
     failed_apps = []
-    
+
+    source = load_existing_source(SOURCE_JSON_PATH)
+    source.setdefault("name", DEFAULT_SOURCE["name"])
+    source.setdefault("identifier", DEFAULT_SOURCE["identifier"])
+    source.setdefault("apps", [])
+
     for app_config in APPS_CONFIG:
         app_name = app_config["name"]
         repo_owner = app_config["repo_owner"]
@@ -377,55 +490,16 @@ def main():
             # Note: We can't directly download the IPA from artifact URL without authentication
             # The download_url requires auth, so we rely on GitHub's digest
         else:
-            # Use releases (original behavior)
-            release, ipa_asset = get_latest_release_with_ipa(repo_owner, repo_name)
-            
-            if not release or not ipa_asset:
-                print(f"[{app_name}] warning: Could not find any release with an IPA asset", file=sys.stderr)
+            try:
+                changed = sync_release_history(source, app_config)
+            except Exception as e:
+                print(f"[{app_name}] warning: {e}", file=sys.stderr)
                 failed_apps.append(app_name)
                 continue
-            
-            release_tag = release.get("tag_name", "unknown")
-            release_date = release.get("published_at", datetime.now(timezone.utc).isoformat())
-            ipa_name = ipa_asset.get("name", f"{app_name}.ipa")
-            ipa_url = ipa_asset.get("browser_download_url")
-            ipa_size = ipa_asset.get("size", 0)
-            
-            print(f"[{app_name}] Found IPA: {ipa_name}")
-            print(f"[{app_name}] Release: {release_tag}")
-            print(f"[{app_name}] Size: {ipa_size} bytes")
-            print(f"[{app_name}] URL: {ipa_url}")
-            
-            # Extract version from IPA name
-            version, build_number = extract_version_from_ipa_name(ipa_name, app_name)
-            print(f"[{app_name}] Parsed version: {version}, build: {build_number}")
-            
-            # Calculate SHA-256 hash by downloading the IPA
-            sha256_hash = None
-            try:
-                print(f"[{app_name}] Downloading IPA to calculate SHA-256...")
-                ipa_data = fetch_url_content(ipa_url)
-                sha256_hash = calculate_sha256(ipa_data)
-                print(f"[{app_name}] SHA-256: {sha256_hash}")
-            except Exception as e:
-                print(f"[{app_name}] warning: Could not download IPA for SHA-256 calculation: {e}", file=sys.stderr)
-                # Use the digest from GitHub API if available
-                gh_digest = ipa_asset.get("digest", "")
-                if gh_digest.startswith("sha256:"):
-                    sha256_hash = gh_digest.replace("sha256:", "")
-                    print(f"[{app_name}] Using GitHub digest: {sha256_hash}")
-        
-        # Load or create source JSON
-        source = load_existing_source(SOURCE_JSON_PATH)
-        
-        # Ensure required fields exist
-        if "name" not in source:
-            source["name"] = DEFAULT_SOURCE["name"]
-        if "identifier" not in source:
-            source["identifier"] = DEFAULT_SOURCE["identifier"]
-        if "apps" not in source:
-            source["apps"] = []
-        
+            if changed:
+                updated_apps.append(app_name)
+            continue
+
         # Update app
         changed = update_or_add_app(
             source,
