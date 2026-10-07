@@ -17,10 +17,20 @@
       "repo_name": "HyperNix-pip",
       "sourceCodeURL": "https://github.com/trail-b1az3r/HyperNix-pip",
       "version": "1.1.26.9.0.0",
-      "date": "2026-10-01T14:09:19Z",
-      "downloadURL": "https://github.com/trail-b1az3r/HyperNix-pip/releases/download/v0.72.6.post4/HyperLink-1.1.26.9.0.0-b194-unsigned.ipa",
-      "size": 3619047,
+      "date": "2026-10-07T04:34:46Z",
+      "downloadURL": "https://github.com/trail-b1az3r/HyperNix-pip/releases/download/v0.72.7/HyperLink-1.1.26.9.0.0-b200-unsigned.ipa",
+      "size": 3619053,
       "versions": [
+        {
+          "version": "1.1.26.9.0.0",
+          "date": "2026-10-07T04:34:46Z",
+          "downloadURL": "https://github.com/trail-b1az3r/HyperNix-pip/releases/download/v0.72.7/HyperLink-1.1.26.9.0.0-b200-unsigned.ipa",
+          "size": 3619053,
+          "localizedDescription": "## Changelog\n![PyPI - Downloads](https://img.shields.io/pypi/dm/hypernix)\n![PyPI - Version](https://img.shields.io/pypi/v/hypernix)\n\nCommits since the last stable release (`v0.72.6.post4`):\n\n- chore: refresh generated docs data and release summaries (c763500c)\n- Windows: never probe a pid with os.kill(pid, 0) (55aadbb6)\n- 0.72.7: version, changelog heading and the measured benchmark results (8b25e66f)\n- Python 3.15 without torch: say so, and skip what needs it (2137d41b)\n- chore: update JSON stats (scheduled) (07034ed9)\n- Windows CI: the remaining 26, and the 3.12-3.15 matrix fixes it found (0a5db23c)\n- chore: refresh generated docs data and release summaries (e29949ad)\n- 0.72.7 step 3: Python 3.12-3.15 -- requires-python, PEP 798/799/810/831 (1a35b713)\n- 0.72.7 step 2: Windows CI -- real bugs fixed, tests made platform-honest (316780e9)\n- 0.72.7 step 2: images on the HyperNix runner; macOS/Linux CI and first Windows fixes (d595eb4a)\n- chore: refresh generated docs data and release summaries (d3fa96c1)\n- 0.72.7 step 1: link config-less models, `runner auto`, images converted on upload (203b7112)\n- chore: refresh generated docs data and release summaries (721b8155)\n- chore: refresh generated docs data and release summaries (c570f302)\n- chore: update JSON stats (scheduled) (b577f6b8)\n- chore: refresh generated docs data and release summaries (dd56f3a1)\n- chore: refresh generated docs data and release summaries (902b1354)\n- chore: refresh generated docs data and release summaries (b170ba0b)\n- chore: refresh generated docs data and release summaries (3918b1af)\n- chore: update JSON stats (scheduled) (33317b73)\n- chore: refresh generated docs data and release summaries (23555524)\n- chore: refresh generated docs data and release summaries (c886becf)\n- chore: refresh generated docs data and release summaries (1e3ee90b)\n- chore: refresh generated docs data and release summaries (1b12e9da)\n- chore: refresh generated docs data and release summaries (471f5a36)\n- chore: update JSON stats (scheduled) (230155d9)\n- chore: refresh generated docs data and release summaries (c153ac9a)\n- chore: refresh generated docs data and release summaries (cd1b2749)\n- chore: refresh generated docs data and release summaries (2706912f)\n- chore: refresh generated docs data and release summaries (b4691be4)\n- chore: refresh generated docs data and release summaries (c71f5634)\n- chore: update JSON stats (scheduled) (2cc67f82)\n- chore: refresh generated docs data and release summaries (ae0cb554)\n- chore: refresh generated docs data and release summaries (5ad5205f)\n- chore: refresh generated docs data and release summaries (b143d617)\n- chore: refresh generated docs data and release summaries (f8c9c1f8)\n- chore: update JSON stats (scheduled) (f73e586b)\n- chore: refresh generated docs data and release summaries (064750c5)\n- Auto-update README header (hourly) (fa2a1c50)\n- chore: refresh generated docs data and release summaries (957cd861)\n\n### HyperLink\n\nThe attached `HyperLink-*.ipa` is",
+          "sourceCodeURL": "https://github.com/trail-b1az3r/HyperNix-pip",
+          "sha256": "0499dfe3f3ce65e88a008cd4c87a461affdb1005d168ab038c7742412082a760",
+          "buildVersion": "200"
+        },
         {
           "version": "1.1.26.9.0.0",
           "date": "2026-10-01T14:09:19Z",
@@ -215,6 +225,6 @@
     }
   ],
   "news": [],
-  "updated_at": "2026-10-01T14:24:48.206568Z",
+  "updated_at": "2026-10-07T04:37:44.502694Z",
   "last_manual_run_reason": "ddddd"
 }
