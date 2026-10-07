@@ -15,6 +15,7 @@ import json
 import os
 import sys
 import hashlib
+import urllib.parse
 import urllib.request
 from datetime import datetime, timezone
 
@@ -108,7 +109,7 @@ def get_latest_release_with_ipa(repo_owner, repo_name):
         return None, None
 
 
-MAX_RELEASES = 30
+MAX_RELEASES = 31
 MAX_NOTES_CHARS = 3000
 
 
@@ -121,33 +122,52 @@ def list_releases(repo_owner, repo_name):
     return [r for r in releases if not r.get("draft") and not r.get("prerelease")]
 
 
+NOTES_HEADER = "## HyperLink updates"
+EARLIER_HEADER = "\n\n## Earlier updates\n"
+EARLIER_VERSIONS = 5
+APP_SOURCE_PATH = "ios"
+
+
+_app_commit_cache = {}
+
+
+def app_commits(repo_owner, repo_name, tag):
+    """Commits reachable from `tag` that touched APP_SOURCE_PATH, newest first: [(sha, subject)]."""
+    key = (repo_owner, repo_name, tag)
+    if key not in _app_commit_cache:
+        query = urllib.parse.urlencode({"sha": tag, "path": APP_SOURCE_PATH, "per_page": "100"})
+        commits = fetch_json(
+            f"https://api.github.com/repos/{repo_owner}/{repo_name}/commits?{query}",
+            require_auth=True,
+        )
+        _app_commit_cache[key] = [(c["sha"], c["commit"]["message"].split("\n", 1)[0].strip()) for c in commits]
+    return _app_commit_cache[key]
+
+
 def build_release_notes(repo_owner, repo_name, release, previous_release):
     """
-    Changelog text for a release: its release notes if it has any, otherwise the
-    commit subjects between the previous release tag and this one.
+    Changelog for a release: a header plus the subjects of commits that changed
+    the app (APP_SOURCE_PATH) in this release's tag but not in the previous
+    release's tag. Returns "" if the commits can't be fetched.
     """
-    body = (release.get("body") or "").replace("\r\n", "\n").strip()
-    if body:
-        return body[:MAX_NOTES_CHARS]
+    try:
+        current = app_commits(repo_owner, repo_name, release["tag_name"])
+        if previous_release:
+            seen = {sha for sha, _ in app_commits(repo_owner, repo_name, previous_release["tag_name"])}
+            current = [(sha, subj) for sha, subj in current if sha not in seen]
+        else:
+            current = current[:20]
+    except Exception as e:
+        print(f"warning: could not list app commits for {release.get('tag_name')}: {e}", file=sys.stderr)
+        return ""
 
-    if previous_release:
-        base = previous_release.get("tag_name")
-        head = release.get("tag_name")
-        try:
-            cmp = fetch_json(
-                f"https://api.github.com/repos/{repo_owner}/{repo_name}/compare/{base}...{head}",
-                require_auth=True,
-            )
-            subjects = [
-                c["commit"]["message"].split("\n", 1)[0].strip()
-                for c in reversed(cmp.get("commits", []))
-            ]
-            subjects = [m for m in subjects if m and not m.startswith("Merge ")]
-            if subjects:
-                return "\n".join(f"- {m}" for m in subjects)[:MAX_NOTES_CHARS]
-        except Exception as e:
-            print(f"warning: could not compare {base}...{head}: {e}", file=sys.stderr)
-    return ""
+    subjects = []
+    for _, subject in current:
+        if subject and not subject.startswith("Merge ") and subject not in subjects:
+            subjects.append(subject)
+    if not subjects:
+        return f"{NOTES_HEADER}\n- No app changes in this release."
+    return NOTES_HEADER + "\n" + "\n".join(f"- {m}" for m in subjects)[:MAX_NOTES_CHARS]
 
 
 def sync_release_history(source, app_config):
@@ -170,9 +190,12 @@ def sync_release_history(source, app_config):
             continue
         url = asset["browser_download_url"]
         previous = releases[i + 1] if i + 1 < len(releases) else None
-        notes = build_release_notes(owner, repo, release, previous)
-
         old = existing.get(url)
+        if old and (old.get("localizedDescription") or "").startswith(NOTES_HEADER):
+            notes = old["localizedDescription"].split(EARLIER_HEADER)[0]
+        else:
+            notes = build_release_notes(owner, repo, release, previous)
+
         version, build = extract_version_from_ipa_name(asset["name"], app_name)
         entry = {
             "version": version,
@@ -206,6 +229,21 @@ def sync_release_history(source, app_config):
     kept = [v for u, v in existing.items() if u not in fetched_urls]
     versions = sorted(fetched + kept, key=lambda v: v.get("date", ""), reverse=True)
 
+    # Clients show only the newest version's notes up front, so fold the
+    # previous few versions' notes into it to keep older changes visible.
+    earlier = []
+    for v in versions[1:1 + EARLIER_VERSIONS]:
+        notes = v["localizedDescription"]
+        if not notes.startswith(NOTES_HEADER):
+            continue
+        body = notes[len(NOTES_HEADER):].strip()
+        earlier.append(f"### {v['version']} (build {v.get('buildVersion')}) - {v['date'][:10]}\n{body}")
+    if earlier:
+        versions[0]["localizedDescription"] = (
+            versions[0]["localizedDescription"].split(EARLIER_HEADER)[0]
+            + EARLIER_HEADER + "\n\n".join(earlier)
+        )[:MAX_NOTES_CHARS * 2]
+
     if app is not None and app.get("versions") == versions:
         print(f"No update needed: {app_name} history is already current ({len(versions)} versions)")
         return False
@@ -214,7 +252,8 @@ def sync_release_history(source, app_config):
     if app is None:
         app = {k: v for k, v in app_config.items() if k not in ("ipa_source", "workflow_id", "artifact_pattern")}
         apps.append(app)
-    app.update(version=latest["version"], date=latest["date"], downloadURL=latest["downloadURL"], size=latest["size"])
+    app.update(version=latest["version"], date=latest["date"], downloadURL=latest["downloadURL"], size=latest["size"],
+               versionDescription=latest["localizedDescription"])
     app["versions"] = versions
     print(f"Synced {app_name}: {len(versions)} versions, latest {latest['version']} (build {latest.get('buildVersion')})")
     return True
