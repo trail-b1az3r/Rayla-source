@@ -126,33 +126,41 @@ NOTES_HEADER = "## HyperLink updates"
 APP_SOURCE_PATH = "ios"
 
 
+_app_commit_cache = {}
+
+
+def app_commits(repo_owner, repo_name, tag):
+    """Commits reachable from `tag` that touched APP_SOURCE_PATH, newest first: [(sha, subject)]."""
+    key = (repo_owner, repo_name, tag)
+    if key not in _app_commit_cache:
+        query = urllib.parse.urlencode({"sha": tag, "path": APP_SOURCE_PATH, "per_page": "100"})
+        commits = fetch_json(
+            f"https://api.github.com/repos/{repo_owner}/{repo_name}/commits?{query}",
+            require_auth=True,
+        )
+        _app_commit_cache[key] = [(c["sha"], c["commit"]["message"].split("\n", 1)[0].strip()) for c in commits]
+    return _app_commit_cache[key]
+
+
 def build_release_notes(repo_owner, repo_name, release, previous_release):
     """
     Changelog for a release: a header plus the subjects of commits that changed
-    the app (APP_SOURCE_PATH) since the previous release. Returns "" if the
-    commits can't be fetched, so the caller can fall back.
+    the app (APP_SOURCE_PATH) in this release's tag but not in the previous
+    release's tag. Returns "" if the commits can't be fetched.
     """
-    params = {
-        "sha": release.get("tag_name"),
-        "path": APP_SOURCE_PATH,
-        "per_page": "40",
-    }
-    if release.get("published_at"):
-        params["until"] = release["published_at"]
-    if previous_release and previous_release.get("published_at"):
-        params["since"] = previous_release["published_at"]
     try:
-        commits = fetch_json(
-            f"https://api.github.com/repos/{repo_owner}/{repo_name}/commits?" + urllib.parse.urlencode(params),
-            require_auth=True,
-        )
+        current = app_commits(repo_owner, repo_name, release["tag_name"])
+        if previous_release:
+            seen = {sha for sha, _ in app_commits(repo_owner, repo_name, previous_release["tag_name"])}
+            current = [(sha, subj) for sha, subj in current if sha not in seen]
+        else:
+            current = current[:20]
     except Exception as e:
         print(f"warning: could not list app commits for {release.get('tag_name')}: {e}", file=sys.stderr)
         return ""
 
     subjects = []
-    for c in commits:
-        subject = c["commit"]["message"].split("\n", 1)[0].strip()
+    for _, subject in current:
         if subject and not subject.startswith("Merge ") and subject not in subjects:
             subjects.append(subject)
     if not subjects:
