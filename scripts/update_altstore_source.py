@@ -123,6 +123,8 @@ def list_releases(repo_owner, repo_name):
 
 
 NOTES_HEADER = "## HyperLink updates"
+EARLIER_HEADER = "\n\n## Earlier updates\n"
+EARLIER_VERSIONS = 5
 APP_SOURCE_PATH = "ios"
 
 
@@ -190,7 +192,7 @@ def sync_release_history(source, app_config):
         previous = releases[i + 1] if i + 1 < len(releases) else None
         old = existing.get(url)
         if old and (old.get("localizedDescription") or "").startswith(NOTES_HEADER):
-            notes = old["localizedDescription"]
+            notes = old["localizedDescription"].split(EARLIER_HEADER)[0]
         else:
             notes = build_release_notes(owner, repo, release, previous)
 
@@ -227,6 +229,21 @@ def sync_release_history(source, app_config):
     kept = [v for u, v in existing.items() if u not in fetched_urls]
     versions = sorted(fetched + kept, key=lambda v: v.get("date", ""), reverse=True)
 
+    # Clients show only the newest version's notes up front, so fold the
+    # previous few versions' notes into it to keep older changes visible.
+    earlier = []
+    for v in versions[1:1 + EARLIER_VERSIONS]:
+        notes = v["localizedDescription"]
+        if not notes.startswith(NOTES_HEADER):
+            continue
+        body = notes[len(NOTES_HEADER):].strip()
+        earlier.append(f"### {v['version']} (build {v.get('buildVersion')}) - {v['date'][:10]}\n{body}")
+    if earlier:
+        versions[0]["localizedDescription"] = (
+            versions[0]["localizedDescription"].split(EARLIER_HEADER)[0]
+            + EARLIER_HEADER + "\n\n".join(earlier)
+        )[:MAX_NOTES_CHARS * 2]
+
     if app is not None and app.get("versions") == versions:
         print(f"No update needed: {app_name} history is already current ({len(versions)} versions)")
         return False
@@ -235,7 +252,8 @@ def sync_release_history(source, app_config):
     if app is None:
         app = {k: v for k, v in app_config.items() if k not in ("ipa_source", "workflow_id", "artifact_pattern")}
         apps.append(app)
-    app.update(version=latest["version"], date=latest["date"], downloadURL=latest["downloadURL"], size=latest["size"])
+    app.update(version=latest["version"], date=latest["date"], downloadURL=latest["downloadURL"], size=latest["size"],
+               versionDescription=latest["localizedDescription"])
     app["versions"] = versions
     print(f"Synced {app_name}: {len(versions)} versions, latest {latest['version']} (build {latest.get('buildVersion')})")
     return True
