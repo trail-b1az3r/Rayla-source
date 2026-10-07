@@ -15,6 +15,7 @@ import json
 import os
 import sys
 import hashlib
+import urllib.parse
 import urllib.request
 from datetime import datetime, timezone
 
@@ -108,7 +109,7 @@ def get_latest_release_with_ipa(repo_owner, repo_name):
         return None, None
 
 
-MAX_RELEASES = 30
+MAX_RELEASES = 31
 MAX_NOTES_CHARS = 3000
 
 
@@ -121,33 +122,42 @@ def list_releases(repo_owner, repo_name):
     return [r for r in releases if not r.get("draft") and not r.get("prerelease")]
 
 
+NOTES_HEADER = "## HyperLink updates"
+APP_SOURCE_PATH = "ios"
+
+
 def build_release_notes(repo_owner, repo_name, release, previous_release):
     """
-    Changelog text for a release: its release notes if it has any, otherwise the
-    commit subjects between the previous release tag and this one.
+    Changelog for a release: a header plus the subjects of commits that changed
+    the app (APP_SOURCE_PATH) since the previous release. Returns "" if the
+    commits can't be fetched, so the caller can fall back.
     """
-    body = (release.get("body") or "").replace("\r\n", "\n").strip()
-    if body:
-        return body[:MAX_NOTES_CHARS]
+    params = {
+        "sha": release.get("tag_name"),
+        "path": APP_SOURCE_PATH,
+        "per_page": "40",
+    }
+    if release.get("published_at"):
+        params["until"] = release["published_at"]
+    if previous_release and previous_release.get("published_at"):
+        params["since"] = previous_release["published_at"]
+    try:
+        commits = fetch_json(
+            f"https://api.github.com/repos/{repo_owner}/{repo_name}/commits?" + urllib.parse.urlencode(params),
+            require_auth=True,
+        )
+    except Exception as e:
+        print(f"warning: could not list app commits for {release.get('tag_name')}: {e}", file=sys.stderr)
+        return ""
 
-    if previous_release:
-        base = previous_release.get("tag_name")
-        head = release.get("tag_name")
-        try:
-            cmp = fetch_json(
-                f"https://api.github.com/repos/{repo_owner}/{repo_name}/compare/{base}...{head}",
-                require_auth=True,
-            )
-            subjects = [
-                c["commit"]["message"].split("\n", 1)[0].strip()
-                for c in reversed(cmp.get("commits", []))
-            ]
-            subjects = [m for m in subjects if m and not m.startswith("Merge ")]
-            if subjects:
-                return "\n".join(f"- {m}" for m in subjects)[:MAX_NOTES_CHARS]
-        except Exception as e:
-            print(f"warning: could not compare {base}...{head}: {e}", file=sys.stderr)
-    return ""
+    subjects = []
+    for c in commits:
+        subject = c["commit"]["message"].split("\n", 1)[0].strip()
+        if subject and not subject.startswith("Merge ") and subject not in subjects:
+            subjects.append(subject)
+    if not subjects:
+        return f"{NOTES_HEADER}\n- No app changes in this release."
+    return NOTES_HEADER + "\n" + "\n".join(f"- {m}" for m in subjects)[:MAX_NOTES_CHARS]
 
 
 def sync_release_history(source, app_config):
@@ -170,9 +180,12 @@ def sync_release_history(source, app_config):
             continue
         url = asset["browser_download_url"]
         previous = releases[i + 1] if i + 1 < len(releases) else None
-        notes = build_release_notes(owner, repo, release, previous)
-
         old = existing.get(url)
+        if old and (old.get("localizedDescription") or "").startswith(NOTES_HEADER):
+            notes = old["localizedDescription"]
+        else:
+            notes = build_release_notes(owner, repo, release, previous)
+
         version, build = extract_version_from_ipa_name(asset["name"], app_name)
         entry = {
             "version": version,

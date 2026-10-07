@@ -50,7 +50,7 @@ This repository uses GitHub Actions to automatically update the AltStore/SideSto
 
 1. The workflow lists the app's recent GitHub releases that contain an `.ipa` asset
 2. Builds one version entry per release and merges it into the existing history (older versions are never dropped)
-3. Uses the release notes as the version's "What's New" text, or the commit messages since the previous release if the notes are empty
+3. Writes each version's "What's New" as a `HyperLink updates` header plus only the commits that changed the app (`ios/`) since the previous release
 4. Reuses stored SHA-256 hashes and downloads only new IPAs to hash them
 5. Commits changes only if updates were detected
 
