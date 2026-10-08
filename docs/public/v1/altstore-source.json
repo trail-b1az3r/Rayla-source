@@ -17,16 +17,26 @@
       "repo_name": "HyperNix-pip",
       "sourceCodeURL": "https://github.com/trail-b1az3r/HyperNix-pip",
       "version": "1.1.26.9.0.0",
-      "date": "2026-10-07T04:34:46Z",
-      "downloadURL": "https://github.com/trail-b1az3r/HyperNix-pip/releases/download/v0.72.7/HyperLink-1.1.26.9.0.0-b200-unsigned.ipa",
-      "size": 3619053,
+      "date": "2026-10-08T02:11:34Z",
+      "downloadURL": "https://github.com/trail-b1az3r/HyperNix-pip/releases/download/v0.72.7.post1/HyperLink-1.1.26.9.0.0-b203-unsigned.ipa",
+      "size": 3619042,
       "versions": [
+        {
+          "version": "1.1.26.9.0.0",
+          "date": "2026-10-08T02:11:34Z",
+          "downloadURL": "https://github.com/trail-b1az3r/HyperNix-pip/releases/download/v0.72.7.post1/HyperLink-1.1.26.9.0.0-b203-unsigned.ipa",
+          "size": 3619042,
+          "localizedDescription": "## HyperLink updates\n- No app changes in this release.\n\n## Earlier updates\n### 1.1.26.9.0.0 (build 200) - 2026-10-07\n- No app changes in this release.\n\n### 1.1.26.9.0.0 (build 194) - 2026-10-01\n- No app changes in this release.\n\n### 1.1.26.9.0.0 (build 190) - 2026-09-30\n- HyperLink: symlinked models load, and models can be linked from the app\n- tests: one folder per package\n\n### 1.1.26.9.0.0 (build 186) - 2026-09-27\n- No app changes in this release.\n\n### 1.1.26.9.0.0 (build 184) - 2026-09-27\n- HyperLink: move LM Studio's model onto the HyperNix runner",
+          "sourceCodeURL": "https://github.com/trail-b1az3r/HyperNix-pip",
+          "sha256": "41422e1a003ac971f3431f2c5959aee11f9fc1a842e2d6a179510e9df9c88c86",
+          "buildVersion": "203"
+        },
         {
           "version": "1.1.26.9.0.0",
           "date": "2026-10-07T04:34:46Z",
           "downloadURL": "https://github.com/trail-b1az3r/HyperNix-pip/releases/download/v0.72.7/HyperLink-1.1.26.9.0.0-b200-unsigned.ipa",
           "size": 3619053,
-          "localizedDescription": "## HyperLink updates\n- No app changes in this release.\n\n## Earlier updates\n### 1.1.26.9.0.0 (build 194) - 2026-10-01\n- No app changes in this release.\n\n### 1.1.26.9.0.0 (build 190) - 2026-09-30\n- HyperLink: symlinked models load, and models can be linked from the app\n- tests: one folder per package\n\n### 1.1.26.9.0.0 (build 186) - 2026-09-27\n- No app changes in this release.\n\n### 1.1.26.9.0.0 (build 184) - 2026-09-27\n- HyperLink: move LM Studio's model onto the HyperNix runner\n\n### 1.1.26.9.0.0 (build 181) - 2026-09-24\n- HyperLink: memories sync from the server as they change\n- HyperLink: the assistant's bubble tail no longer punches a hole in it\n- 0.72.6.rc3: a HyperLink model has its tools on the route the app uses\n- HyperLink Siri: say what the phrases match, and name models as they are said\n- 0.72.6 pt4 docs: every page current, and a test that keeps them so\n- HyperLink: Siri on App Intents entities, so chats and models can be named\n- HyperLink: model titles, compression, private chats, organised memory, images, shell, tails\n- 0.72.6 pt3: T1 tools for local models, and HyperLink swipe, memories, search, on-device\n- 0.72.6 pt2: hyperchat, and three things HyperLink was showing wrong\n- 0.72.6 pt2: gather, Vera, neo_oven presets, hub 1.x, T1 v1.1",
+          "localizedDescription": "## HyperLink updates\n- No app changes in this release.",
           "sourceCodeURL": "https://github.com/trail-b1az3r/HyperNix-pip",
           "sha256": "0499dfe3f3ce65e88a008cd4c87a461affdb1005d168ab038c7742412082a760",
           "buildVersion": "200"
@@ -222,10 +232,10 @@
           "buildVersion": "143"
         }
       ],
-      "versionDescription": "## HyperLink updates\n- No app changes in this release.\n\n## Earlier updates\n### 1.1.26.9.0.0 (build 194) - 2026-10-01\n- No app changes in this release.\n\n### 1.1.26.9.0.0 (build 190) - 2026-09-30\n- HyperLink: symlinked models load, and models can be linked from the app\n- tests: one folder per package\n\n### 1.1.26.9.0.0 (build 186) - 2026-09-27\n- No app changes in this release.\n\n### 1.1.26.9.0.0 (build 184) - 2026-09-27\n- HyperLink: move LM Studio's model onto the HyperNix runner\n\n### 1.1.26.9.0.0 (build 181) - 2026-09-24\n- HyperLink: memories sync from the server as they change\n- HyperLink: the assistant's bubble tail no longer punches a hole in it\n- 0.72.6.rc3: a HyperLink model has its tools on the route the app uses\n- HyperLink Siri: say what the phrases match, and name models as they are said\n- 0.72.6 pt4 docs: every page current, and a test that keeps them so\n- HyperLink: Siri on App Intents entities, so chats and models can be named\n- HyperLink: model titles, compression, private chats, organised memory, images, shell, tails\n- 0.72.6 pt3: T1 tools for local models, and HyperLink swipe, memories, search, on-device\n- 0.72.6 pt2: hyperchat, and three things HyperLink was showing wrong\n- 0.72.6 pt2: gather, Vera, neo_oven presets, hub 1.x, T1 v1.1"
+      "versionDescription": "## HyperLink updates\n- No app changes in this release.\n\n## Earlier updates\n### 1.1.26.9.0.0 (build 200) - 2026-10-07\n- No app changes in this release.\n\n### 1.1.26.9.0.0 (build 194) - 2026-10-01\n- No app changes in this release.\n\n### 1.1.26.9.0.0 (build 190) - 2026-09-30\n- HyperLink: symlinked models load, and models can be linked from the app\n- tests: one folder per package\n\n### 1.1.26.9.0.0 (build 186) - 2026-09-27\n- No app changes in this release.\n\n### 1.1.26.9.0.0 (build 184) - 2026-09-27\n- HyperLink: move LM Studio's model onto the HyperNix runner"
     }
   ],
   "news": [],
-  "updated_at": "2026-10-07T17:32:15.055220Z",
+  "updated_at": "2026-10-08T05:05:19.683422Z",
   "last_manual_run_reason": "ddddd"
 }
