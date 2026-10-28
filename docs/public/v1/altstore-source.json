@@ -16,17 +16,27 @@
       "repo_owner": "trail-b1az3r",
       "repo_name": "HyperNix-pip",
       "sourceCodeURL": "https://github.com/trail-b1az3r/HyperNix-pip",
-      "version": "1.1.26.9.0.0",
-      "date": "2026-10-08T02:11:34Z",
-      "downloadURL": "https://github.com/trail-b1az3r/HyperNix-pip/releases/download/v0.72.7.post1/HyperLink-1.1.26.9.0.0-b203-unsigned.ipa",
-      "size": 3619042,
+      "version": "1.1.26.10.2.0",
+      "date": "2026-10-28T18:01:22Z",
+      "downloadURL": "https://github.com/trail-b1az3r/HyperNix-pip/releases/download/v0.72.8/HyperLink-1.1.26.10.2.0-b240-unsigned.ipa",
+      "size": 3706860,
       "versions": [
+        {
+          "version": "1.1.26.10.2.0",
+          "date": "2026-10-28T18:01:22Z",
+          "downloadURL": "https://github.com/trail-b1az3r/HyperNix-pip/releases/download/v0.72.8/HyperLink-1.1.26.10.2.0-b240-unsigned.ipa",
+          "size": 3706860,
+          "localizedDescription": "## HyperLink updates\n- HyperLink: stop dropping a Tailscale connection the moment it is made\n- 0.72.8a3: the installer's and the iOS app's T1 version fallbacks follow 1.1.26.10.2.0\n- HyperLink iOS: the chat request carries dataset parts and a code sandbox\n- 0.72.8 pt3 (part 3): HyperLink Markdown, dataset excerpts, code-session tools\n- release: 0.72.8a1 -- signed prompts, web v2, multi-llama, new hybrids\n- Multi-llama runner; the hnx llama mod knows the forks' types\n- HyperLink: two-layer ring beside the chat box\n- HyperLink: hypercompress, tool choice, memories only when told, documents\n- T1 v1.1.26.10.1.0; the model's web_search uses /web/v2\n- HyperLink chats per account/key, signed prompts, ping; web v2 search\n- HyperLink: every loaded model listed, and a chat picks which answers\n\n## Earlier updates\n### 1.1.26.9.0.0 (build 203) - 2026-10-08\n- No app changes in this release.\n\n### 1.1.26.9.0.0 (build 200) - 2026-10-07\n- No app changes in this release.\n\n### 1.1.26.9.0.0 (build 194) - 2026-10-01\n- No app changes in this release.\n\n### 1.1.26.9.0.0 (build 190) - 2026-09-30\n- HyperLink: symlinked models load, and models can be linked from the app\n- tests: one folder per package\n\n### 1.1.26.9.0.0 (build 186) - 2026-09-27\n- No app changes in this release.",
+          "sourceCodeURL": "https://github.com/trail-b1az3r/HyperNix-pip",
+          "sha256": "96fa4614e2ca3e3db49396817ee48f8772aa666ab723367f3c637adcdca3bf52",
+          "buildVersion": "240"
+        },
         {
           "version": "1.1.26.9.0.0",
           "date": "2026-10-08T02:11:34Z",
           "downloadURL": "https://github.com/trail-b1az3r/HyperNix-pip/releases/download/v0.72.7.post1/HyperLink-1.1.26.9.0.0-b203-unsigned.ipa",
           "size": 3619042,
-          "localizedDescription": "## HyperLink updates\n- No app changes in this release.\n\n## Earlier updates\n### 1.1.26.9.0.0 (build 200) - 2026-10-07\n- No app changes in this release.\n\n### 1.1.26.9.0.0 (build 194) - 2026-10-01\n- No app changes in this release.\n\n### 1.1.26.9.0.0 (build 190) - 2026-09-30\n- HyperLink: symlinked models load, and models can be linked from the app\n- tests: one folder per package\n\n### 1.1.26.9.0.0 (build 186) - 2026-09-27\n- No app changes in this release.\n\n### 1.1.26.9.0.0 (build 184) - 2026-09-27\n- HyperLink: move LM Studio's model onto the HyperNix runner",
+          "localizedDescription": "## HyperLink updates\n- No app changes in this release.",
           "sourceCodeURL": "https://github.com/trail-b1az3r/HyperNix-pip",
           "sha256": "41422e1a003ac971f3431f2c5959aee11f9fc1a842e2d6a179510e9df9c88c86",
           "buildVersion": "203"
@@ -232,10 +242,10 @@
           "buildVersion": "143"
         }
       ],
-      "versionDescription": "## HyperLink updates\n- No app changes in this release.\n\n## Earlier updates\n### 1.1.26.9.0.0 (build 200) - 2026-10-07\n- No app changes in this release.\n\n### 1.1.26.9.0.0 (build 194) - 2026-10-01\n- No app changes in this release.\n\n### 1.1.26.9.0.0 (build 190) - 2026-09-30\n- HyperLink: symlinked models load, and models can be linked from the app\n- tests: one folder per package\n\n### 1.1.26.9.0.0 (build 186) - 2026-09-27\n- No app changes in this release.\n\n### 1.1.26.9.0.0 (build 184) - 2026-09-27\n- HyperLink: move LM Studio's model onto the HyperNix runner"
+      "versionDescription": "## HyperLink updates\n- HyperLink: stop dropping a Tailscale connection the moment it is made\n- 0.72.8a3: the installer's and the iOS app's T1 version fallbacks follow 1.1.26.10.2.0\n- HyperLink iOS: the chat request carries dataset parts and a code sandbox\n- 0.72.8 pt3 (part 3): HyperLink Markdown, dataset excerpts, code-session tools\n- release: 0.72.8a1 -- signed prompts, web v2, multi-llama, new hybrids\n- Multi-llama runner; the hnx llama mod knows the forks' types\n- HyperLink: two-layer ring beside the chat box\n- HyperLink: hypercompress, tool choice, memories only when told, documents\n- T1 v1.1.26.10.1.0; the model's web_search uses /web/v2\n- HyperLink chats per account/key, signed prompts, ping; web v2 search\n- HyperLink: every loaded model listed, and a chat picks which answers\n\n## Earlier updates\n### 1.1.26.9.0.0 (build 203) - 2026-10-08\n- No app changes in this release.\n\n### 1.1.26.9.0.0 (build 200) - 2026-10-07\n- No app changes in this release.\n\n### 1.1.26.9.0.0 (build 194) - 2026-10-01\n- No app changes in this release.\n\n### 1.1.26.9.0.0 (build 190) - 2026-09-30\n- HyperLink: symlinked models load, and models can be linked from the app\n- tests: one folder per package\n\n### 1.1.26.9.0.0 (build 186) - 2026-09-27\n- No app changes in this release."
     }
   ],
   "news": [],
-  "updated_at": "2026-10-08T05:05:19.683422Z",
+  "updated_at": "2026-10-28T21:05:30.766145Z",
   "last_manual_run_reason": "ddddd"
 }
